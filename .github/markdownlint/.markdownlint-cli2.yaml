@@ -1,0 +1,10 @@
+# https://github.com/DavidAnson/markdownlint-cli2#markdownlint-cli2yaml
+
+# additional configuration to the config in the root of the project
+# this additional config is used during the markdownlint CI job
+
+outputFormatters:
+  - - markdownlint-cli2-formatter-template
+    # https://github.com/DavidAnson/markdownlint-cli2/blob/50e1be2d6f205fdc2f2aca1f786c882e9fce5aac/formatter-template/README.md#examples
+    - template: "::error file=${fileName},line=${lineNumber},${columnNumber:col=${columnNumber},}title=${ruleName}::${ruleDescription} [Context: \"${errorContext}\"]"
+  - - markdownlint-cli2-formatter-pretty

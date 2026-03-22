@@ -1,0 +1,16 @@
+# https://github.com/DavidAnson/markdownlint?tab=readme-ov-file#rules--aliases
+
+line-length: false
+
+ul-indent:
+  indent: 4
+
+ul-style:
+  style: dash
+
+# Allow same heading name if the parent is different
+no-duplicate-heading:
+  siblings_only: true
+
+# Allow bare URLs since they are usually automatically converted to links
+no-bare-urls: false
