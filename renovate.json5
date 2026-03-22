@@ -39,6 +39,15 @@
   // https://docs.renovatebot.com/configuration-options/#prhourlylimit
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0,
+  // Also get updates for images in jinja templates
+  "docker-compose": {
+    "managerFilePatterns": [
+      // default: https://docs.renovatebot.com/modules/manager/docker-compose/#default-config
+      "/(^|/)(?:docker-)?compose[^/]*\\.ya?ml$/",
+      // also detect jinja compose files
+      "/(^|/)(?:docker-)?compose[^/]*\\.ya?ml\\.jinja$/",
+    ],
+  },
   "packageRules": [
     // Combine uv package, uv image, and uv-pre-commit
     {
