@@ -1,0 +1,6 @@
+# https://copier-template-tester.kyleking.me/#configuration-file
+# minimal defaults required to generate a project
+[defaults]
+_pre_tasks = [
+    "docker compose config --quiet"
+]

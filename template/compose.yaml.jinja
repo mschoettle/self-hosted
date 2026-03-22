@@ -1,0 +1,33 @@
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:v3.6.11
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - TZ=${TIMEZONE:?}
+    volumes:
+      - type: bind
+        source: ./traefik.yaml
+        target: /etc/traefik/traefik.yaml
+        read_only: true
+      - type: bind
+        source: ./config/traefik
+        target: /config
+        read_only: true
+      - type: bind
+        source: ${TRAEFIK_ACME_PATH:?}
+        target: /acme/
+      - type: bind
+        source: ${TRAEFIK_LOGS_PATH:?}
+        target: /logs
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        read_only: true
+
+networks:
+  default:
+    name: traefiknet
