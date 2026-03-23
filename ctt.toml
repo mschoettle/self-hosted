@@ -2,7 +2,7 @@
 # minimal defaults required to generate a project
 [defaults]
 _pre_tasks = [
-    "docker compose config --quiet"
+    "tests/check_missing_envs.sh"
 ]
 
 [output.".ctt/defaults"]
