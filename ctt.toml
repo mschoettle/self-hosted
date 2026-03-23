@@ -4,3 +4,8 @@
 _pre_tasks = [
     "docker compose config --quiet"
 ]
+
+[output.".ctt/defaults"]
+_post_tasks = [
+    "docker compose config --format json | jq --exit-status '.services | length == 1'"
+]
