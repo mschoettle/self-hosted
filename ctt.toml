@@ -4,6 +4,8 @@
 _pre_tasks = [
     "tests/check_missing_envs.sh",
 ]
+letsencrypt_challenge = "tls"
+letsencrypt_email = "foo@bar.baz"
 
 [output.".ctt/defaults"]
 _post_tasks = [
