@@ -49,3 +49,4 @@ jobs:
       - name: Test template using copier-template-tester
         run: |
           ./ctt.sh
+          uv run --prerelease=allow --with copier --with copier-templates-extensions --with copier-template-tester ctt
