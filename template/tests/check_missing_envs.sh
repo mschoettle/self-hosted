@@ -17,4 +17,6 @@ if printf '%s\n' "$(validate_config)" | grep --quiet "required variable TRAEFIK_
     sed -i "s|^TRAEFIK_LOGS_PATH=$|TRAEFIK_LOGS_PATH=./volumes/logs|" .env
 fi
 
+cat .env
+
 docker compose config --quiet
