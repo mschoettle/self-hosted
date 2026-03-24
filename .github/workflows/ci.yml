@@ -62,4 +62,4 @@ jobs:
           version: "0.10.12"
       - name: Test template using copier-template-tester
         run: |
-          uv run --with copier --with copier-template-tester ctt
+          uv run --prerelease=allow --with copier --with copier-template-tester ctt
