@@ -2,10 +2,12 @@
 # minimal defaults required to generate a project
 [defaults]
 _pre_tasks = [
-    "tests/check_missing_envs.sh"
+    "tests/check_missing_envs.sh",
 ]
 
 [output.".ctt/defaults"]
 _post_tasks = [
-    "docker compose config --format json | jq --exit-status '.services | length == 1'"
+    "docker compose config --format json | jq --exit-status '.services | length == 1'",
+    "docker compose up -d",
+    "docker compose down",
 ]
