@@ -13,20 +13,30 @@ services:
         source: ./traefik.yaml
         target: /etc/traefik/traefik.yaml
         read_only: true
+        bind:
+          create_host_path: false
       - type: bind
         source: ./config/traefik
         target: /config
         read_only: true
+        bind:
+          create_host_path: false
       - type: bind
         source: ${TRAEFIK_ACME_PATH:?}
         target: /acme/
+        bind:
+          create_host_path: false
       - type: bind
         source: ${TRAEFIK_LOGS_PATH:?}
         target: /logs
+        bind:
+          create_host_path: false
       - type: bind
         source: /var/run/docker.sock
         target: /var/run/docker.sock
         read_only: true
+        bind:
+          create_host_path: false
 
 networks:
   default:
