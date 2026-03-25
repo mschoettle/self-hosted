@@ -14,3 +14,6 @@ _post_tasks = [
     "docker compose up -d",
     "docker compose down",
 ]
+
+[output.".ctt/dns_challenge"]
+letsencrypt_challenge = "dns"

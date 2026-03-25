@@ -20,5 +20,3 @@ fi
 cat .env
 
 docker compose config --quiet
-
-docker compose config
