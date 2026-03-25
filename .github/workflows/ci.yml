@@ -48,5 +48,4 @@ jobs:
           version: "0.10.12"
       - name: Test template using copier-template-tester
         run: |
-          docker compose version
           ./ctt.sh

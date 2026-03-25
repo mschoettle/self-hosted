@@ -11,6 +11,9 @@ letsencrypt_email = "foo@bar.baz"
 _post_tasks = [
     "ls -la",
     "docker compose config --format json | jq --exit-status '.services | length == 1'",
+    "mv traefik.sample.yaml traefik.yaml",
+    "mkdir -p ./volumes/acme",
+    "mkdir -p ./volumes/logs",
     "docker compose up -d",
     "docker compose down",
 ]
