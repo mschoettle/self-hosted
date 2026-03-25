@@ -49,4 +49,4 @@ jobs:
       - name: Test template using copier-template-tester
         run: |
           ./ctt.sh
-          docker run --mount type=bind,src=/dev/noexist,dst=/mnt/foo alpine
+          docker compose version
