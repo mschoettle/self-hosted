@@ -5,8 +5,8 @@ run_stack() {
     docker compose up -d 2>&1 || true
 }
 
-# consider that any missing variable can be reported first
-# we are getting non-deterministic results when running docker compose config --quiet
+# consider that any missing path can be reported first
+# we are getting non-deterministic results when running docker compose up
 # see: https://github.com/docker/compose/issues/13712
 missing_paths() {
     run_result="$(run_stack)"
