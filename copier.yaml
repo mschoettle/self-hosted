@@ -1,0 +1,20 @@
+letsencrypt_challenge:
+  type: str
+  help: Which ACME challenge do you want to use to request and renew certificates via Let's Encrypt?
+  choices:
+    - tls
+    - dns
+
+letsencrypt_email:
+  type: str
+  help: Email address to provide to Let's Encrypt
+
+# recommended by copier-template-tester to have the template in a subdirectory
+# also makes it easier to control which files should be part of the template itself
+_subdirectory: template
+
+# https://copier.readthedocs.io/en/latest/configuring/#jinja_extensions
+_jinja_extensions:
+  # https://github.com/copier-org/copier-templates-extensions/#usage
+  - copier_templates_extensions.TemplateExtensionLoader
+  - extensions/strictundefined.py:StrictUndefinedExtension

@@ -24,26 +24,28 @@ jobs:
         with:
           persist-credentials: false
       - name: Install uv
-        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
+        uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57 # v8.0.0
         id: setup-uv
         with:
-          # renovate: datasource=pypi dependency=uv
-          version: "0.10.12"
+          # renovate: datasource=pypi depName=uv
+          version: "0.11.2"
       - uses: j178/prek-action@79f765515bd648eb4d6bb1b17277b7cb22cb6468 # v2.0.0
         with:
-          # renovate: datasource=pypi dependency=prek
-          prek-version: "0.3.6"
-        env:
-          SKIP: markdownlint-cli2
-      - name: Run markdownlint
-        if: '!cancelled()'
-        env:
-          # renovate: datasource=docker depName=davidanson/markdownlint-cli2-rules versioning=semver
-          MARKDOWNLINT_CLI2_VERSION: v0.21.0
-        # node user does not have permissions to workspace due to user id mismatch -> use root
+          # renovate: datasource=pypi depName=prek
+          prek-version: "0.3.8"
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - name: Install uv
+        uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57 # v8.0.0
+        id: setup-uv
+        with:
+          # renovate: datasource=pypi depName=uv
+          version: "0.11.2"
+      - name: Test template using copier-template-tester
         run: |
-          docker run --rm \
-          -v ${{ github.workspace }}:/workdir \
-          --user root \
-          davidanson/markdownlint-cli2-rules:${{ env.MARKDOWNLINT_CLI2_VERSION }} \
-          markdownlint-cli2 --config .github/markdownlint/.markdownlint-cli2.yaml "**/*.md"
+          ./ctt.sh
