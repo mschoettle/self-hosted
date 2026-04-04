@@ -1,0 +1,18 @@
+[project]
+name = "self-hosted"
+version = "0"
+requires-python = "==3.14.3"
+dependencies = [
+    "copier==9.14.0",
+    "copier-templates-extensions==0.3.2",
+]
+
+# https://docs.astral.sh/uv/reference/settings/#configuration
+[tool.uv]
+add-bounds = "exact"
+exclude-newer = "7 days"
+
+[dependency-groups]
+dev = [
+    "copier-template-tester==2.4.0b0",
+]
