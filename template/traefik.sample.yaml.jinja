@@ -39,7 +39,7 @@ certificatesResolvers:
     acme:
       {%- if letsencrypt_challenge == 'tls' %}
       tlsChallenge: {}
-      {%- elif letsencrypt_challenge == 'dns' -%}
+      {%- elif letsencrypt_challenge == 'dns' %}
       dnsChallenge:
         provider:
         propagation:
