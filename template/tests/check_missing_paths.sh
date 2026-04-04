@@ -10,7 +10,7 @@ run_stack() {
 # see: https://github.com/docker/compose/issues/13712
 missing_paths() {
     run_result="$(run_stack)"
-    echo "$run_result"
+    # echo "$run_result"
 
     if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*traefik.yaml"; then
         echo "creating traefik.yaml"
