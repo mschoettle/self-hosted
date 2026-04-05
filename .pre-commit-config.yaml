@@ -62,3 +62,12 @@ repos:
           # and checks these with shellcheck.
           # see also: https://github.com/rhysd/actionlint/pull/482
           - "github.com/wasilibs/go-shellcheck/cmd/shellcheck@v0.11.1"
+
+  - repo: https://github.com/renovatebot/pre-commit-hooks
+    rev: 43.102.8
+    hooks:
+      - id: renovate-config-validator
+        stages:
+          - manual
+        args: ["--strict"]
+        files: ".*\\.json5$"
