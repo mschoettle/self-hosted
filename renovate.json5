@@ -59,5 +59,16 @@
       "matchPackageNames": ["/markdownlint-cli2/"],
       "groupName": "markdownlint-cli2",
     },
+    // Upgrade updates for container images to fix/feat
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "semanticCommitType": "fix",
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["major"],
+      "semanticCommitType": "feat",
+    },
   ],
 }
