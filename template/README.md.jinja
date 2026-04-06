@@ -4,11 +4,16 @@ This self-hosted stack is generated from the template at: https://github.com/msc
 
 ## Getting Started
 
-Initialize a Git repository and version changes to your stack.
+1. Initialize a Git repository and version changes to your stack.
 
-```shell
-git init
-```
+    ```shell
+    git init
+    ```
+
+1. Define missing env variables in `.env`
+{%- if letsencrypt_challenge == 'dns' %}
+1. Add the [environment variables for your DNS provider](https://go-acme.github.io/lego/dns/) to `.envs/letsencrypt.env`.
+{%- endif %}
 
 ## Updating
 
@@ -27,4 +32,4 @@ uvx copier update
 ## Features of this stack
 
 - reverse proxy via [`traefik`](https://doc.traefik.io/traefik/)
-{% if }
+  - [Let's Encrypt ACME challenge](https://doc.traefik.io/traefik/reference/install-configuration/tls/certificate-resolvers/acme/#the-different-acme-challenges): {{ letsencrypt_challenge | upper }}

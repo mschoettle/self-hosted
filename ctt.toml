@@ -9,7 +9,7 @@ letsencrypt_email = "foo@bar.baz"
 
 [output.".ctt/defaults"]
 _post_tasks = [
-    "ls -la",
+    "! ls .envs/letsencrypt.env",
     "docker compose config --format json | jq --exit-status '.services | length == 1'",
     "tests/check_missing_paths.sh",
     "docker compose up -d",
@@ -18,3 +18,7 @@ _post_tasks = [
 
 [output.".ctt/dns_challenge"]
 letsencrypt_challenge = "dns"
+_post_tasks = [
+    "ls .envs/letsencrypt.env",
+    "tests/check_missing_paths.sh",
+]

@@ -8,6 +8,10 @@ services:
       - "443:443"
     environment:
       - TZ=${TIMEZONE:?}
+    {%- if letsencrypt_challenge == 'dns' %}
+    env_file:
+      - .envs/letsencrypt.env
+    {%- endif %}
     volumes:
       - type: bind
         source: ./traefik.yaml

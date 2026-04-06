@@ -10,7 +10,7 @@ validate_config() {
 # see: https://github.com/docker/compose/issues/13712
 check_config() {
     validate_result="$(validate_config)"
-    echo $validate_result
+    # echo $validate_result
     if printf '%s\n' "$validate_result" | grep --quiet "required variable TIMEZONE is missing a value"; then
         echo "setting timezone"
         sed -i.bak "s|^TIMEZONE=$|TIMEZONE=America/Toronto|" .env
