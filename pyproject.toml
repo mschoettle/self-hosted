@@ -15,5 +15,6 @@ exclude-newer = "7 days"
 [dependency-groups]
 dev = [
     "copier-template-tester==2.4.0b0",
+    "j2lint==1.2.0",
     "prek==0.3.8",
 ]

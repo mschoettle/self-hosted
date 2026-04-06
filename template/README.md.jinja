@@ -1,0 +1,30 @@
+# My self-hosted stack
+
+This self-hosted stack is generated from the template at: https://github.com/mschoettle/self-hosted
+
+## Getting Started
+
+Initialize a Git repository and version changes to your stack.
+
+```shell
+git init
+```
+
+## Updating
+
+To update your stack to a new version, run the following command:
+
+```shell
+copier update
+```
+
+Or, via the [`uvx command`](https://docs.astral.sh/uv/guides/tools/#running-tools) of [`uv`](https://docs.astral.sh/uv/):
+
+```shell
+uvx copier update
+```
+
+## Features of this stack
+
+- reverse proxy via [`traefik`](https://doc.traefik.io/traefik/)
+{% if }

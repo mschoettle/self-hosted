@@ -41,6 +41,12 @@ repos:
         args: ["--verbose"]
         additional_dependencies: ['json5']
 
+  - repo: https://github.com/aristanetworks/j2lint
+    rev: v1.2.0
+    hooks:
+      - id: j2lint
+        args: [--ignore, jinja-statements-delimiter, --]
+
   - repo: https://github.com/executablebooks/mdformat
     rev: 1.0.0
     hooks:
