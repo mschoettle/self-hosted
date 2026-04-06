@@ -26,6 +26,17 @@ check_config() {
         echo "setting logs path"
         sed -i.bak "s|^TRAEFIK_LOGS_PATH=$|TRAEFIK_LOGS_PATH=./volumes/logs|" .env
     fi
+
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable PIHOLE_VOLUME_PATH is missing a value"; then
+        echo "setting pihole volume path"
+        sed -i.bak "s|^PIHOLE_VOLUME_PATH=$|PIHOLE_VOLUME_PATH=./volumes/pihole|" .env
+    fi
+
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable PIHOLE_DOMAIN is missing a value"; then
+        echo "setting pihole domain"
+        sed -i.bak "s|^PIHOLE_DOMAIN=$|PIHOLE_DOMAIN=pihole.example.dev|" .env
+    fi
+
 }
 
 # Check that all variables are required
@@ -34,5 +45,10 @@ docker compose config --variables --format json | jq --exit-status '[.[] | .Requ
 check_config
 check_config
 check_config
+
+{%- if use_pihole %}
+check_config
+check_config
+{%- endif %}
 
 docker compose config --quiet

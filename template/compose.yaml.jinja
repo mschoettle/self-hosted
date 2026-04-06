@@ -42,15 +42,20 @@ services:
         bind:
           create_host_path: false
 
-{#
+{#-
   Include compose files as is to be able to lint them
   Strip their first line (services:)
-#}
+-#}
+{%- macro load_compose_file(filename) -%}
+{%- set path = "./template/" ~ filename -%}
+{%- set content %}
+{%- include path -%}
+{%- endset %}
+{{ content.split('\n', 1)[1] }}
+{%- endmacro -%}
+
 {%- if use_pihole %}
-{%- set pihole_content %}
-{%- include "./template/compose.pihole.yaml" -%}
-{% endset %}
-{{ pihole_content.split('\n', 1)[1] }}
+{{ load_compose_file("compose.pihole.yaml") }}
 {%- endif %}
 
 networks:
