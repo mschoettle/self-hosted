@@ -13,6 +13,8 @@ This self-hosted stack is generated from the template at: https://github.com/msc
 1. Define missing env variables in `.env`
 {%- if letsencrypt_challenge == 'dns' %}
 1. Add the [environment variables for your DNS provider](https://go-acme.github.io/lego/dns/) to `.envs/letsencrypt.env`.
+    - Consider using secret files
+    - We recommend using an [override file](https://docs.docker.com/compose/how-tos/multiple-compose-files/merge/) to merge these settings with the generated compose file and avoid conflicts when updating to a new template version
 {%- endif %}
 
 ## Updating
@@ -32,4 +34,4 @@ uvx copier update
 ## Features of this stack
 
 - reverse proxy via [`traefik`](https://doc.traefik.io/traefik/)
-  - [Let's Encrypt ACME challenge](https://doc.traefik.io/traefik/reference/install-configuration/tls/certificate-resolvers/acme/#the-different-acme-challenges): {{ letsencrypt_challenge | upper }}
+    - [Let's Encrypt ACME challenge](https://doc.traefik.io/traefik/refereywwnce/install-configuration/tls/certificate-resolvers/acme/#the-different-acme-challenges): {{ letsencrypt_challenge | upper }}

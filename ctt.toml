@@ -20,5 +20,13 @@ _post_tasks = [
 letsencrypt_challenge = "dns"
 _post_tasks = [
     "ls .envs/letsencrypt.env",
+    "docker compose config --format json | jq --exit-status '.services | length == 1'",
     "tests/check_missing_paths.sh",
+]
+
+[output.".ctt/pihole"]
+use_pihole = true
+_post_tasks = [
+    "! ls compose.pihole.yaml",
+    "docker compose config --format json | jq --exit-status '.services | length == 2'",
 ]

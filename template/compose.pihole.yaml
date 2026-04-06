@@ -1,0 +1,35 @@
+services:
+  # https://github.com/pi-hole/docker-pi-hole/
+  # https://docs.pi-hole.net/
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:2026.02.0
+    ports:
+      # DNS Ports
+      - "53:53/tcp"
+      - "53:53/udp"
+    environment:
+      TZ: ${TIMEZONE:?}
+      FTLCONF_dns_listeningMode: 'ALL'
+    volumes:
+      # Persist Pi-hole's databases and common configuration file
+      - type: bind
+        source: ${PIHOLE_VOLUME_PATH:?}
+        target: /etc/pihole
+    # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - SYS_NICE
+    cap_drop:
+      # No DHCPv6 needed
+      - NET_RAW
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pihole.rule=Host(`${PIHOLE_DOMAIN:?}`)"
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
+      # Always redirect / to /admin/
+      # TODO: check if we can use the $PIHOLE_DOMAIN variable here
+      - "traefik.http.middlewares.pihole-redirect.redirectregex.regex=^(https://pihole\\.changeme\\.tld)/?$"
+      - "traefik.http.middlewares.pihole-redirect.redirectregex.replacement=$${1}/admin/"
+      - "traefik.http.middlewares.pihole-redirect.redirectregex.permanent=true"
+      - "traefik.http.routers.pihole.middlewares=pihole-redirect"

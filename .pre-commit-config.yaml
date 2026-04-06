@@ -45,7 +45,7 @@ repos:
     rev: v1.2.0
     hooks:
       - id: j2lint
-        args: [--ignore, jinja-statements-delimiter, --]
+        args: [--ignore, jinja-statements-delimiter, jinja-statements-indentation, --]
 
   - repo: https://github.com/executablebooks/mdformat
     rev: 1.0.0
