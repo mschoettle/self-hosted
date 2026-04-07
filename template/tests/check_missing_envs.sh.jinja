@@ -40,15 +40,19 @@ check_config() {
 }
 
 # Check that all variables are required
+echo "checking that all variables are required..."
 docker compose config --variables --format json | jq --exit-status '[.[] | .Required] | all'
 
+echo "setting missing env variables..."
 check_config
 check_config
 check_config
 
 {%- if use_pihole %}
+echo "pihole is enabled, setting missing pihole env variables..."
 check_config
 check_config
 {%- endif %}
 
+echo "final config check..."
 docker compose config --quiet
