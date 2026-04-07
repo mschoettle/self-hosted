@@ -3,6 +3,7 @@
 [defaults]
 _pre_tasks = [
     "tests/check_missing_envs.sh",
+    "tests/check_missing_paths.sh",
 ]
 letsencrypt_challenge = "tls"
 letsencrypt_email = "foo@bar.baz"
@@ -13,9 +14,6 @@ _post_tasks = [
     "! ls compose.*.yaml",
     "docker compose config --format json | jq --exit-status '.services | length == 1'",
     "docker compose config --format json | jq --exit-status '.services[\"traefik\"] | .container_name == \"traefik\"'",
-    "tests/check_missing_paths.sh",
-    # "docker compose up -d",
-    # "docker compose down",
 ]
 
 [output.".ctt/dns_challenge"]
@@ -24,7 +22,6 @@ _post_tasks = [
     "ls .envs/letsencrypt.env",
     "docker compose config --format json | jq --exit-status '.services | length == 1'",
     "docker compose config --format json | jq --exit-status '.services[\"traefik\"] | .container_name == \"traefik\"'",
-    "tests/check_missing_paths.sh",
 ]
 
 [output.".ctt/pihole"]
@@ -32,5 +29,10 @@ use_pihole = true
 _post_tasks = [
     "docker compose config --format json | jq --exit-status '.services | length == 2'",
     "docker compose config --format json | jq --exit-status '.services[\"pihole\"] | .container_name == \"pihole\"'",
-    "tests/check_missing_paths.sh",
+]
+
+[output.".ctt/all"]
+use_pihole = true
+_post_tasks = [
+    "docker compose config --format json | jq --exit-status '.services | length == 2'",
 ]
