@@ -1,7 +1,17 @@
+# https://doc.traefik.io/traefik/reference/routing-configuration/http/tls/tls-options/
+#
+# defaults determined with the help of Mozilla SSL Configuration Generator
+# https://ssl-config.mozilla.org/
+
 tls:
   options:
     default:
       minVersion: VersionTLS12
+      curvePreferences:
+        - X25519MLKEM768
+        - X25519
+        - CurveP256
+        - CurveP384
       cipherSuites:
         - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
         - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384

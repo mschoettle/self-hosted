@@ -1,3 +1,5 @@
+# https://copier.readthedocs.io/en/latest/configuring/
+
 letsencrypt_challenge:
   type: str
   help: Which ACME challenge do you want to use to request and renew certificates via Let's Encrypt?
@@ -9,9 +11,17 @@ letsencrypt_email:
   type: str
   help: Email address to provide to Let's Encrypt
 
+use_pihole:
+  type: bool
+  default: false
+  help: Do you want to use Pi-hole in your network?
+
 # recommended by copier-template-tester to have the template in a subdirectory
 # also makes it easier to control which files should be part of the template itself
 _subdirectory: template
+
+_exclude:
+  - "compose.*.yaml"
 
 # https://copier.readthedocs.io/en/latest/configuring/#jinja_extensions
 _jinja_extensions:
