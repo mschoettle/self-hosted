@@ -13,7 +13,7 @@ This self-hosted stack is generated from the template at: https://github.com/msc
 1. Define missing env variables in `.env`
 {%- if letsencrypt_challenge == 'dns' %}
 1. Add the [environment variables for your DNS provider](https://go-acme.github.io/lego/dns/) to `.envs/letsencrypt.env`.
-    - Consider using secret files
+    - We recommend using [secrets](https://docs.docker.com/reference/compose-file/secrets/) for API keys and passwords
     - We recommend using an [override file](https://docs.docker.com/compose/how-tos/multiple-compose-files/merge/) to merge these settings with the generated compose file and avoid conflicts when updating to a new template version
 {%- endif %}
 
