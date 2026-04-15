@@ -44,6 +44,7 @@ use_pihole = true
 use_nextcloud = true
 _post_tasks = [
     "docker compose config --format json | jq --exit-status '.services | length == 6'",
+    "docker compose ps",
     "docker compose up -d",
     "docker compose down",
 ]
