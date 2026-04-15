@@ -37,7 +37,7 @@ missing_paths() {
         mkdir -p volumes/postgres
     fi
 
-    if printf '%s\n' "$run_result" | grep --quiet "\.secrets/db_root_password"; then
+    if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*\.secrets/db_root_password"; then
         echo "creating db-root-password secret file"
         mkdir -p .secrets
         echo "testpassword" > .secrets/db_root_password
@@ -73,3 +73,6 @@ missing_paths
 missing_paths
 missing_paths
 {%- endif %}
+
+docker compose up -d
+docker compose down

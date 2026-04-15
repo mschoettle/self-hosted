@@ -12,6 +12,8 @@ services:
       - type: bind
         source: ${POSTGRESDB_VOLUME_PATH:?}
         target: /var/lib/postgresql
+        bind:
+          create_host_path: false
 
 secrets:
   db-root-password:
