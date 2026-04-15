@@ -2,15 +2,20 @@
 set -euo pipefail
 
 run_stack() {
-    docker compose up -d 2>&1 || true
+    docker compose up -d "$1" 2>&1 || true
 }
 
 # consider that any missing path can be reported first
 # we are getting non-deterministic results when running docker compose up
 # see: https://github.com/docker/compose/issues/13712
 missing_paths() {
-    run_result="$(run_stack)"
+    run_result="$(run_stack $1)"
     # echo "$run_result"
+
+    if printf '%s\n' "$run_result" | grep --quiet "no such service"; then
+        echo "$run_result"
+        exit 1
+    fi
 
     if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*traefik.yaml"; then
         echo "creating traefik.yaml"
@@ -32,7 +37,6 @@ missing_paths() {
         mkdir -p volumes/pihole
     fi
 
-    {%- if needs_db %}
     if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/postgres"; then
         echo "creating postgres directory"
         mkdir -p volumes/postgres
@@ -43,9 +47,7 @@ missing_paths() {
         mkdir -p .secrets
         echo "testpassword" > .secrets/db_root_password
     fi
-    {%- endif %}
 
-    {%- if use_nextcloud %}
     if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/nextcloud"; then
         echo "creating nextcloud directory"
         mkdir -p volumes/nextcloud
@@ -55,27 +57,31 @@ missing_paths() {
         echo "creating valkey directory"
         mkdir -p volumes/valkey
     fi
-    {%- endif %}
 }
 
 echo "checking missing source paths..."
 
-missing_paths
-missing_paths
-missing_paths
+missing_paths traefik
+missing_paths traefik
+missing_paths traefik
 
 {%- if use_pihole %}
-missing_paths
+missing_paths pihole
 {%- endif %}
 
 {%- if needs_db %}
-missing_paths
-missing_paths
+missing_paths db
+missing_paths db
 {%- endif %}
 
 {%- if use_nextcloud %}
-missing_paths
-missing_paths
+missing_paths valkey
+missing_paths nextcloud
 {%- endif %}
 
+echo "checking for running containers (there should be none)..."
+docker compose ps
+docker compose ps --format json | jq --exit-status --slurp "length == 0"
+
+# remove any containers that were created
 docker compose down
