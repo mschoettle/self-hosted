@@ -45,6 +45,8 @@ use_nextcloud = true
 _post_tasks = [
     "docker compose config --format json | jq --exit-status '.services | length == 6'",
     "docker ps -a",
+    # change pihole port to avoid conflicts in CI
+    "sed -i.bak \"s|\"53:53/|\"5353:53/|\" compose.yaml",
     "docker compose up -d",
     "docker compose down",
 ]
