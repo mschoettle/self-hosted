@@ -17,6 +17,7 @@ These are the available services that are currently supported by this template.
 They are all optional:
 
 - [Pi-hole](https://pi-hole.net/): Network-wide ad blocking
+- [Nextcloud](https://nextcloud.com/): Content collaboration platform, e.g., used for file hosting
 
 ## Copy this template
 

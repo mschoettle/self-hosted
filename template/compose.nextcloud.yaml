@@ -1,0 +1,47 @@
+services:
+  valkey:
+    container_name: nextcloud-valkey
+    image: valkey/valkey:9.0.3-alpine3.23
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: ${VALKEY_VOLUME_PATH:?}
+        target: /data
+
+  nextcloud:
+    container_name: nextcloud
+    image: nextcloud:32.0.6-apache
+    restart: unless-stopped
+    depends_on:
+      - db
+      - valkey
+    volumes:
+      - type: bind
+        source: ${NEXTCLOUD_VOLUME_PATH:?}
+        target: /var/www/html
+    environment:
+      - TZ=${TIMEZONE:?}
+      - REDIS_HOST=valkey
+      - TRUSTED_PROXIES=${NEXTCLOUD_TRUSTED_PROXIES:?}
+      - OVERWRITEPROTOCOL=https
+      - OVERWRITECLIURL=https://${NEXTCLOUD_DOMAIN:?}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextcloud.rule=Host(`${NEXTCLOUD_DOMAIN:?}`)"
+      - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+    # required for setupchecks to work
+    dns:
+      - 192.168.1.10
+
+  nextcloud-cron:
+    container_name: nextcloud-cron
+    image: nextcloud:32.0.6-apache
+    restart: unless-stopped
+    depends_on:
+      - db
+      - valkey
+    volumes:
+      - type: bind
+        source: ${NEXTCLOUD_VOLUME_PATH:?}
+        target: /var/www/html
+    entrypoint: /cron.sh

@@ -31,6 +31,27 @@ missing_paths() {
         echo "creating pihole directory"
         mkdir -p volumes/pihole
     fi
+
+    if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/postgres"; then
+        echo "creating postgres directory"
+        mkdir -p volumes/postgres
+    fi
+
+    if printf '%s\n' "$run_result" | grep --quiet "\.secrets/db_root_password"; then
+        echo "creating db-root-password secret file"
+        mkdir -p .secrets
+        echo "testpassword" > .secrets/db_root_password
+    fi
+
+    if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/nextcloud"; then
+        echo "creating nextcloud directory"
+        mkdir -p volumes/nextcloud
+    fi
+
+    if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/valkey"; then
+        echo "creating valkey directory"
+        mkdir -p volumes/valkey
+    fi
 }
 
 echo "checking missing source paths..."
@@ -40,5 +61,15 @@ missing_paths
 missing_paths
 
 {%- if use_pihole %}
+missing_paths
+{%- endif %}
+
+{%- if needs_db %}
+missing_paths
+missing_paths
+{%- endif %}
+
+{%- if use_nextcloud %}
+missing_paths
 missing_paths
 {%- endif %}

@@ -58,6 +58,14 @@ services:
 {{ load_compose_file("compose.pihole.yaml") }}
 {%- endif %}
 
+{%- if use_nextcloud %}
+{{ load_compose_file("compose.nextcloud.yaml") }}
+{%- endif %}
+
+{%- if needs_db %}
+{{ load_compose_file("compose.postgres.yaml") }}
+{%- endif %}
+
 networks:
   default:
     name: traefiknet
