@@ -32,6 +32,7 @@ missing_paths() {
         mkdir -p volumes/pihole
     fi
 
+    {%- if needs_db %}
     if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/postgres"; then
         echo "creating postgres directory"
         mkdir -p volumes/postgres
@@ -42,7 +43,9 @@ missing_paths() {
         mkdir -p .secrets
         echo "testpassword" > .secrets/db_root_password
     fi
+    {%- endif %}
 
+    {%- if use_nextcloud %}
     if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/nextcloud"; then
         echo "creating nextcloud directory"
         mkdir -p volumes/nextcloud
@@ -52,6 +55,7 @@ missing_paths() {
         echo "creating valkey directory"
         mkdir -p volumes/valkey
     fi
+    {%- endif %}
 }
 
 echo "checking missing source paths..."
@@ -73,3 +77,5 @@ missing_paths
 missing_paths
 missing_paths
 {%- endif %}
+
+docker compose down
