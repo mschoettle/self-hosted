@@ -16,6 +16,16 @@ use_pihole:
   default: false
   help: Do you want to use Pi-hole in your network?
 
+use_nextcloud:
+  type: bool
+  default: false
+  help: Do you want to use Nextcloud?
+
+needs_db:
+  type: bool
+  default: "{{ use_nextcloud }}"
+  when: false
+
 # recommended by copier-template-tester to have the template in a subdirectory
 # also makes it easier to control which files should be part of the template itself
 _subdirectory: template

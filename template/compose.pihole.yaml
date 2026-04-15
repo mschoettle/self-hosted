@@ -16,6 +16,8 @@ services:
       - type: bind
         source: ${PIHOLE_VOLUME_PATH:?}
         target: /etc/pihole
+        bind:
+          create_host_path: false
     # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
       - SYS_NICE

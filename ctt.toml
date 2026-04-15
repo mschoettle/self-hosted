@@ -31,8 +31,22 @@ _post_tasks = [
     "docker compose config --format json | jq --exit-status '.services[\"pihole\"] | .container_name == \"pihole\"'",
 ]
 
+[output.".ctt/nextcloud"]
+use_nextcloud = true
+_post_tasks = [
+    "docker compose config --format json | jq --exit-status '.services | length == 5'",
+    "docker compose config --format json | jq --exit-status '.services[\"nextcloud\"] | .container_name == \"nextcloud\"'",
+    "docker compose config --format json | jq --exit-status '.services[\"db\"] | .container_name == \"db\"'",
+]
+
 [output.".ctt/all"]
 use_pihole = true
+use_nextcloud = true
 _post_tasks = [
-    "docker compose config --format json | jq --exit-status '.services | length == 2'",
+    "docker compose config --format json | jq --exit-status '.services | length == 6'",
+    "docker ps -a",
+    # change pihole port to avoid conflicts in CI
+    "sed -i.bak 's|\"53:53/|\"5353:53/|' compose.yaml",
+    "docker compose up -d",
+    "docker compose down",
 ]
