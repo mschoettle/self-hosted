@@ -28,7 +28,7 @@ jobs:
         id: setup-uv
         with:
           # renovate: datasource=pypi depName=uv
-          version: "0.11.3"
+          version: "0.11.4"
       - uses: j178/prek-action@53276d8b0d10f8b6672aa85b4588c6921d0370cc # v2.0.1
         with:
           # renovate: datasource=pypi depName=prek
@@ -45,7 +45,7 @@ jobs:
         id: setup-uv
         with:
           # renovate: datasource=pypi depName=uv
-          version: "0.11.3"
+          version: "0.11.4"
       - name: Test template using copier-template-tester
         run: |
           ./ctt.sh
