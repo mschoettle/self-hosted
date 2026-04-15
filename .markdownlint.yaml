@@ -3,7 +3,7 @@
 line-length: false
 
 ul-indent:
-  indent: 4
+  indent: 2
 
 ul-style:
   style: dash

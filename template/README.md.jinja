@@ -35,3 +35,13 @@ uvx copier update
 
 - reverse proxy via [`traefik`](https://doc.traefik.io/traefik/)
     - [Let's Encrypt ACME challenge](https://doc.traefik.io/traefik/reference/install-configuration/tls/certificate-resolvers/acme/#the-different-acme-challenges): {{ letsencrypt_challenge | upper }}
+{%- if use_pihole %}
+- [Pi-hole](https://pi-hole.net/): Network-wide ad blocking
+{%- endif %}
+{%- if needs_db %}
+- [PostgreSQL](https://www.postgresql.org/) database
+{%- endif %}
+{%- if use_nextcloud %}
+- [Nextcloud](https://nextcloud.com/): Content collaboration platform, e.g., used for file hosting
+    - [Valkey](https://valkey.io/) (a Redis fork) is used for [memory caching](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/caching_configuration.html#recommendations-based-on-type-of-deployment)
+{%- endif %}
