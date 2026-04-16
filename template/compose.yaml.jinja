@@ -66,6 +66,10 @@ services:
 {{ load_compose_file("compose.forgejo.yaml") }}
 {%- endif %}
 
+{%- if use_umami %}
+{{ load_compose_file("compose.umami.yaml") }}
+{%- endif %}
+
 {%- if needs_db %}
 {{ load_compose_file("compose.postgres.yaml") }}
 {%- endif %}

@@ -77,6 +77,31 @@ check_config() {
         sed -i.bak "s|^FORGEJO_DOMAIN=$|FORGEJO_DOMAIN=forgejo.example.dev|" .env
     fi
 
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable UMAMI_DB_USER is missing a value"; then
+        echo "setting umami db user"
+        sed -i.bak "s|^UMAMI_DB_USER=$|UMAMI_DB_USER=umami|" .env
+    fi
+
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable UMAMI_DB_PASSWORD is missing a value"; then
+        echo "setting umami db password"
+        sed -i.bak "s|^UMAMI_DB_PASSWORD=$|UMAMI_DB_PASSWORD=umami|" .env
+    fi
+
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable UMAMI_DB_NAME is missing a value"; then
+        echo "setting umami db name"
+        sed -i.bak "s|^UMAMI_DB_NAME=$|UMAMI_DB_NAME=umami|" .env
+    fi
+
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable UMAMI_APP_SECRET is missing a value"; then
+        echo "setting umami app secret"
+        sed -i.bak "s|^UMAMI_APP_SECRET=$|UMAMI_APP_SECRET=testsecret|" .env
+    fi
+
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable UMAMI_DOMAIN is missing a value"; then
+        echo "setting umami domain"
+        sed -i.bak "s|^UMAMI_DOMAIN=$|UMAMI_DOMAIN=umami.example.dev|" .env
+    fi
+
 }
 
 # Check that all variables are required
@@ -110,6 +135,15 @@ check_config
 
 {%- if use_forgejo %}
 echo "forgejo is enabled, setting missing forgejo env variables..."
+check_config
+check_config
+check_config
+{%- endif %}
+
+{%- if use_umami %}
+echo "umami is enabled, setting missing umami env variables..."
+check_config
+check_config
 check_config
 check_config
 check_config

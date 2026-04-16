@@ -26,9 +26,14 @@ use_forgejo:
   default: false
   help: Do you want to use Forgejo?
 
+use_umami:
+  type: bool
+  default: false
+  help: Do you want to use Umami for analytics?
+
 needs_db:
   type: bool
-  default: "{{ use_nextcloud or use_forgejo }}"
+  default: "{{ use_nextcloud or use_forgejo or use_umami }}"
   when: false
 
 # recommended by copier-template-tester to have the template in a subdirectory
