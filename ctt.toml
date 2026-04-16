@@ -47,12 +47,21 @@ _post_tasks = [
     "docker compose config --format json | jq --exit-status '.services[\"db\"] | .container_name == \"db\"'",
 ]
 
+[output.".ctt/umami"]
+use_umami = true
+_post_tasks = [
+    "docker compose config --format json | jq --exit-status '.services | length == 3'",
+    "docker compose config --format json | jq --exit-status '.services[\"umami\"] | .container_name == \"umami\"'",
+    "docker compose config --format json | jq --exit-status '.services[\"db\"] | .container_name == \"db\"'",
+]
+
 [output.".ctt/all"]
 use_pihole = true
 use_nextcloud = true
 use_forgejo = true
+use_umami = true
 _post_tasks = [
-    "docker compose config --format json | jq --exit-status '.services | length == 7'",
+    "docker compose config --format json | jq --exit-status '.services | length == 8'",
     "docker ps -a",
     # change pihole port to avoid conflicts in CI
     "sed -i.bak 's|\"53:53/|\"5353:53/|' compose.yaml",

@@ -1,0 +1,27 @@
+services:
+  umami:
+    container_name: umami
+    image: ghcr.io/umami-software/umami:3.0.3
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      # https://docs.umami.is/docs/environment-variables
+      - TZ=${TIMEZONE:?}
+      - DATABASE_URL=postgresql://${UMAMI_DB_USER:?}:${UMAMI_DB_PASSWORD:?}@db:5432/${UMAMI_DB_NAME:?}
+      - APP_SECRET=${UMAMI_APP_SECRET:?}
+      - DISABLE_TELEMETRY=1
+      - PRIVATE_MODE=1
+      # customize names/routes to avoid blocking by ad blockers
+      # https://umami.is/docs/bypass-ad-blockers
+      - TRACKER_SCRIPT_NAME=stats.js
+      - COLLECT_API_ENDPOINT=/send-stats
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:3000/api/heartbeat"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.umami.rule=Host(`${UMAMI_DOMAIN:?}`)"
+      - "traefik.http.services.umami.loadbalancer.server.port=3000"
