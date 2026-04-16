@@ -19,6 +19,7 @@ They are all optional:
 - [Pi-hole](https://pi-hole.net/): Network-wide ad blocking
 - [Nextcloud](https://nextcloud.com/): Content collaboration platform, e.g., used for file hosting
   - [Valkey](https://valkey.io/) (a Redis fork) is used for [memory caching](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/caching_configuration.html#recommendations-based-on-type-of-deployment)
+- [Forgejo](https://forgejo.org/): Self-hosted collaborative Git hosting (like GitHub)
 
 Some services require a database.
 A [PostgreSQL](https://www.postgresql.org/) database service is added if a service is chosen that requires one.

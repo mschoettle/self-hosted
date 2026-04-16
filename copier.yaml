@@ -21,9 +21,14 @@ use_nextcloud:
   default: false
   help: Do you want to use Nextcloud?
 
+use_forgejo:
+  type: bool
+  default: false
+  help: Do you want to use Forgejo?
+
 needs_db:
   type: bool
-  default: "{{ use_nextcloud }}"
+  default: "{{ use_nextcloud or use_forgejo }}"
   when: false
 
 # recommended by copier-template-tester to have the template in a subdirectory

@@ -62,6 +62,10 @@ services:
 {{ load_compose_file("compose.nextcloud.yaml") }}
 {%- endif %}
 
+{%- if use_forgejo %}
+{{ load_compose_file("compose.forgejo.yaml") }}
+{%- endif %}
+
 {%- if needs_db %}
 {{ load_compose_file("compose.postgres.yaml") }}
 {%- endif %}

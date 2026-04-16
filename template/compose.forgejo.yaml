@@ -1,0 +1,21 @@
+services:
+  forgejo:
+    container_name: forgejo
+    image: codeberg.org/forgejo/forgejo:14.0.3-rootless
+    restart: unless-stopped
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ${FORGEJO_VOLUME_PATH:?}
+        target: /var/lib/gitea
+        bind:
+          create_host_path: false
+    environment:
+      - TZ=${TIMEZONE:?}
+    ports:
+      - ${FORGEJO_SSH_PORT:?}:2222
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.forgejo.rule=Host(`${FORGEJO_DOMAIN:?}`)"
+      - "traefik.http.services.forgejo.loadbalancer.server.port=3000"
