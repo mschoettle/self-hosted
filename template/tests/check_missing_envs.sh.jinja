@@ -62,6 +62,21 @@ check_config() {
         sed -i.bak "s|^VALKEY_VOLUME_PATH=$|VALKEY_VOLUME_PATH=./volumes/valkey|" .env
     fi
 
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable FORGEJO_VOLUME_PATH is missing a value"; then
+        echo "setting forgejo volume path"
+        sed -i.bak "s|^FORGEJO_VOLUME_PATH=$|FORGEJO_VOLUME_PATH=./volumes/forgejo|" .env
+    fi
+
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable FORGEJO_SSH_PORT is missing a value"; then
+        echo "setting forgejo ssh port"
+        sed -i.bak "s|^FORGEJO_SSH_PORT=$|FORGEJO_SSH_PORT=2222|" .env
+    fi
+
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable FORGEJO_DOMAIN is missing a value"; then
+        echo "setting forgejo domain"
+        sed -i.bak "s|^FORGEJO_DOMAIN=$|FORGEJO_DOMAIN=forgejo.example.dev|" .env
+    fi
+
 }
 
 # Check that all variables are required
@@ -88,6 +103,13 @@ check_config
 {%- if use_nextcloud %}
 echo "nextcloud is enabled, setting missing nextcloud env variables..."
 check_config
+check_config
+check_config
+check_config
+{%- endif %}
+
+{%- if use_forgejo %}
+echo "forgejo is enabled, setting missing forgejo env variables..."
 check_config
 check_config
 check_config
