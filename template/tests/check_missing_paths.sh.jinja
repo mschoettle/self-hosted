@@ -9,7 +9,7 @@ run_stack() {
 # we are getting non-deterministic results when running docker compose up
 # see: https://github.com/docker/compose/issues/13712
 missing_paths() {
-    run_result="$(run_stack $1)"
+    run_result="$(run_stack "$1")"
     # echo "$run_result"
 
     if printf '%s\n' "$run_result" | grep --quiet "no such service"; then

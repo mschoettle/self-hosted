@@ -1,0 +1,22 @@
+# https://yamllint.readthedocs.io/en/stable/configuration.html
+# https://yamllint.readthedocs.io/en/stable/rules.html
+
+ignore-from-file:
+  - .gitignore
+
+extends: default
+
+rules:
+  line-length:
+    max: 120
+    ignore:
+      # template formatter line is longer
+      - .markdownlint-cli2.yaml
+  document-start:
+    present: false
+  comments:
+    ignore:
+      # version comments added by Renovate have only one space to content
+      - .github/workflows/ci.yml
+  truthy:
+    check-keys: false
