@@ -1,0 +1,6 @@
+# https://github.com/zavoloklom/docker-compose-linter/#configuration
+# https://github.com/zavoloklom/docker-compose-linter/blob/main/docs/rules.md
+
+rules:
+  # downgrade to warning
+  no-unbound-port-interfaces: 1

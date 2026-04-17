@@ -1,8 +1,7 @@
 services:
   umami:
-    container_name: umami
     image: ghcr.io/umami-software/umami:3.0.3
-    restart: unless-stopped
+    container_name: umami
     depends_on:
       - db
     environment:
@@ -16,6 +15,7 @@ services:
       # https://umami.is/docs/bypass-ad-blockers
       - TRACKER_SCRIPT_NAME=stats.js
       - COLLECT_API_ENDPOINT=/send-stats
+    restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:3000/api/heartbeat"]
       interval: 5s

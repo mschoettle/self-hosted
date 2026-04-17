@@ -1,19 +1,7 @@
 services:
-  valkey:
-    container_name: nextcloud-valkey
-    image: valkey/valkey:9.0.3-alpine3.23
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ${VALKEY_VOLUME_PATH:?}
-        target: /data
-        bind:
-          create_host_path: false
-
   nextcloud:
-    container_name: nextcloud
     image: nextcloud:32.0.6-apache
-    restart: unless-stopped
+    container_name: nextcloud
     depends_on:
       - db
       - valkey
@@ -29,6 +17,7 @@ services:
       - TRUSTED_PROXIES=${NEXTCLOUD_TRUSTED_PROXIES:?}
       - OVERWRITEPROTOCOL=https
       - OVERWRITECLIURL=https://${NEXTCLOUD_DOMAIN:?}
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nextcloud.rule=Host(`${NEXTCLOUD_DOMAIN:?}`)"
@@ -38,9 +27,8 @@ services:
       - 192.168.1.10
 
   nextcloud-cron:
-    container_name: nextcloud-cron
     image: nextcloud:32.0.6-apache
-    restart: unless-stopped
+    container_name: nextcloud-cron
     depends_on:
       - db
       - valkey
@@ -51,3 +39,15 @@ services:
         bind:
           create_host_path: false
     entrypoint: /cron.sh
+    restart: unless-stopped
+
+  valkey:
+    image: valkey/valkey:9.0.3-alpine3.23
+    container_name: nextcloud-valkey
+    volumes:
+      - type: bind
+        source: ${VALKEY_VOLUME_PATH:?}
+        target: /data
+        bind:
+          create_host_path: false
+    restart: unless-stopped
