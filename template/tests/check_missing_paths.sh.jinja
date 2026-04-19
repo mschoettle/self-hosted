@@ -17,11 +17,6 @@ missing_paths() {
         exit 1
     fi
 
-    if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*traefik.yaml"; then
-        echo "creating traefik.yaml"
-        mv traefik.sample.yaml traefik.yaml
-    fi
-
     if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/acme"; then
         echo "creating ACME directory"
         mkdir -p volumes/acme
@@ -66,7 +61,6 @@ missing_paths() {
 
 echo "checking missing source paths..."
 
-missing_paths traefik
 missing_paths traefik
 missing_paths traefik
 
