@@ -28,5 +28,5 @@ A [PostgreSQL](https://www.postgresql.org/) database service is added if a servi
 ## Copy this template
 
 ```shell
-uvx copier copy --trust https://github.com/mschoettle/self-hosted.git
+uvx --with copier-templates-extensions copier copy --trust https://github.com/mschoettle/self-hosted.git
 ```
