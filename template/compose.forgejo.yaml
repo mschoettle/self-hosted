@@ -1,7 +1,7 @@
 services:
   forgejo:
     container_name: forgejo
-    image: codeberg.org/forgejo/forgejo:14.0.3-rootless
+    image: codeberg.org/forgejo/forgejo:14.0.4-rootless
     restart: unless-stopped
     depends_on:
       - db
