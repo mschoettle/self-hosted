@@ -26,16 +26,14 @@ services:
     environment:
       - TZ=${TIMEZONE:?}
       - REDIS_HOST=valkey
-      - TRUSTED_PROXIES=${NEXTCLOUD_TRUSTED_PROXIES:?}
+      - POSTGRES_HOST=db
+      - OVERWRITEHOST=traefik
       - OVERWRITEPROTOCOL=https
       - OVERWRITECLIURL=https://${NEXTCLOUD_DOMAIN:?}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nextcloud.rule=Host(`${NEXTCLOUD_DOMAIN:?}`)"
       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
-    # required for setupchecks to work
-    dns:
-      - 192.168.1.10
 
   nextcloud-cron:
     container_name: nextcloud-cron
