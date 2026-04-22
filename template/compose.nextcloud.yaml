@@ -27,7 +27,7 @@ services:
       - TZ=${TIMEZONE:?}
       - REDIS_HOST=valkey
       - POSTGRES_HOST=db
-      - OVERWRITEHOST=traefik
+      - TRUSTED_PROXIES=${NEXTCLOUD_TRUSTED_PROXIES:?}
       - OVERWRITEPROTOCOL=https
       - OVERWRITECLIURL=https://${NEXTCLOUD_DOMAIN:?}
     labels:

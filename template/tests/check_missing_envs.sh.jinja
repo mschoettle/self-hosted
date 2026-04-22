@@ -52,6 +52,11 @@ check_config() {
         sed -i.bak "s|^NEXTCLOUD_DOMAIN=$|NEXTCLOUD_DOMAIN=nextcloud.example.dev|" .env
     fi
 
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable NEXTCLOUD_TRUSTED_PROXIES is missing a value"; then
+        echo "setting nextcloud trusted proxies"
+        sed -i.bak "s|^NEXTCLOUD_TRUSTED_PROXIES=$|NEXTCLOUD_TRUSTED_PROXIES=172.18.0.0/16|" .env
+    fi
+
     if printf '%s\n' "$validate_result" | grep --quiet "required variable VALKEY_VOLUME_PATH is missing a value"; then
         echo "setting valkey volume path"
         sed -i.bak "s|^VALKEY_VOLUME_PATH=$|VALKEY_VOLUME_PATH=./volumes/valkey|" .env
@@ -122,6 +127,7 @@ check_config
 
 {%- if use_nextcloud %}
 echo "nextcloud is enabled, setting missing nextcloud env variables..."
+check_config
 check_config
 check_config
 check_config
