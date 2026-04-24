@@ -11,10 +11,66 @@ This self-hosted stack is generated from the template at: https://github.com/msc
     ```
 
 1. Define missing env variables in `.env`
+  - `TIMEZONE`: the timezone your stack is running in as a [TZ identifier](ttps://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+  - `TRAEFIK_ACME_PATH`: the directory where the certificates on your host
+  - `TRAEFIK_LOGS_PATH`: the directory where the access logs on your host
 {%- if letsencrypt_challenge == 'dns' %}
-1. Add the [environment variables for your DNS provider](https://go-acme.github.io/lego/dns/) to `.envs/letsencrypt.env`.
+1. Add the name of the DNS provider to `traefik.yaml` in `certificatesResolvers.letsencrypt.acme.dnsChallenge.provider`
+1. Add the [environment variables for your DNS provider](https://go-acme.github.io/lego/dns/) to `.envs/letsencrypt.env`
     - We recommend using [secrets](https://docs.docker.com/reference/compose-file/secrets/) for API keys and passwords
     - We recommend using an [override file](https://docs.docker.com/compose/how-tos/multiple-compose-files/merge/) to merge these settings with the generated compose file and avoid conflicts when updating to a new template version
+{%- endif %}
+1. Create directories for all the volume paths you defined
+
+{%- if needs_db %}
+### Database
+
+Define the missing environment variables in `.env`:
+
+- `POSTGRESDB_VOLUME_PATH`: the directory where the PostgreSQL data on your host
+
+Define the root password in `.secrets/db_root_password`.
+
+{%- endif %}
+
+{%- if use_nextcloud %}
+### Nextcloud
+
+Define the missing environment variables in `.env`:
+
+- `NEXTCLOUD_VOLUME_PATH`: the directory where the Nextcloud data on your host
+- `NEXTCLOUD_DOMAIN`: the domain/hostname the Nextcloud instance will be reachable at
+- `NEXTCLOUD_TRUSTED_PROXIES`: the IP address of your reverse proxy (traefik) to be a [trusted proxy](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/reverse_proxy_configuration.html)
+  ```shell
+  {% raw %}docker inspect traefik --format "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"{% endraw %}
+  ```
+- `VALKEY_VOLUME_PATH`: the directory where the Valkey data on your host
+
+Create a dedicated database user and database for Nextcloud:
+
+```shell
+./scripts/psql_create.sh --user nextcloud --database nextcloud --password <password>
+```
+
+Bring the container up:
+
+```shell
+docker compose up -d nextcloud
+```
+
+You can now access the Nextcloud instance and initiate the setup process.
+
+Once that is done, check the setup via the [`setupchecks` command](https://docs.nextcloud.com/server/stable/admin_manual/occ_command.html#setupchecks-commands-label):
+
+```shell
+docker compose exec --user www-data php occ setupchecks
+```
+
+You can also perform system checks when logging in to the UI as an administrator and navigating to _Administration Settings_ (`/settings/admin/overview`).
+
+Address any findings, such as the maintenance window start.
+The config file is located in `$NEXTCLOUD_VOLUME_PATH/config/config.php`.
+See the [Nextcloud configuration documentation](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/index.html) for more information.
 {%- endif %}
 
 ## Updating
@@ -22,13 +78,13 @@ This self-hosted stack is generated from the template at: https://github.com/msc
 To update your stack to a new version, run the following command:
 
 ```shell
-copier update
+copier update --trust
 ```
 
 Or, via the [`uvx command`](https://docs.astral.sh/uv/guides/tools/#running-tools) of [`uv`](https://docs.astral.sh/uv/):
 
 ```shell
-uvx copier update
+uvx --with copier-templates-extensions copier update --trust
 ```
 
 ## Features of this stack
