@@ -2,6 +2,27 @@
 
 This self-hosted stack is generated from the template at: https://github.com/mschoettle/self-hosted
 
+## Features of this stack
+
+- reverse proxy via [`traefik`](https://doc.traefik.io/traefik/)
+    - [Let's Encrypt ACME challenge](https://doc.traefik.io/traefik/reference/install-configuration/tls/certificate-resolvers/acme/#the-different-acme-challenges): {{ letsencrypt_challenge | upper }}
+{%- if use_pihole %}
+- [Pi-hole](https://pi-hole.net/): Network-wide ad blocking
+{%- endif %}
+{%- if needs_db %}
+- [PostgreSQL](https://www.postgresql.org/) database
+{%- endif %}
+{%- if use_nextcloud %}
+- [Nextcloud](https://nextcloud.com/): Content collaboration platform, e.g., used for file hosting
+    - [Valkey](https://valkey.io/) (a Redis fork) is used for [memory caching](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/caching_configuration.html#recommendations-based-on-type-of-deployment)
+{%- endif %}
+{%- if use_forgejo %}
+- [Forgejo](https://forgejo.org/): Git hosting with collaborative features (like GitHub)
+{%- endif %}
+{%- if use_umami %}
+- [Umami](https://umami.is/): Privacy-focused web analytics
+{%- endif %}
+
 ## Getting Started
 
 1. Initialize a Git repository and version changes to your stack.
@@ -69,7 +90,7 @@ docker compose exec --user www-data php occ setupchecks
 You can also perform system checks when logging in to the UI as an administrator and navigating to _Administration Settings_ (`/settings/admin/overview`).
 
 Address any findings, such as the maintenance window start.
-The config file is located in `$NEXTCLOUD_VOLUME_PATH/config/config.php`.
+The config file is located at `$NEXTCLOUD_VOLUME_PATH/config/config.php`.
 See the [Nextcloud configuration documentation](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/index.html) for more information.
 {%- endif %}
 
@@ -86,24 +107,3 @@ Or, via the [`uvx command`](https://docs.astral.sh/uv/guides/tools/#running-tool
 ```shell
 uvx --with copier-templates-extensions copier update --trust
 ```
-
-## Features of this stack
-
-- reverse proxy via [`traefik`](https://doc.traefik.io/traefik/)
-    - [Let's Encrypt ACME challenge](https://doc.traefik.io/traefik/reference/install-configuration/tls/certificate-resolvers/acme/#the-different-acme-challenges): {{ letsencrypt_challenge | upper }}
-{%- if use_pihole %}
-- [Pi-hole](https://pi-hole.net/): Network-wide ad blocking
-{%- endif %}
-{%- if needs_db %}
-- [PostgreSQL](https://www.postgresql.org/) database
-{%- endif %}
-{%- if use_nextcloud %}
-- [Nextcloud](https://nextcloud.com/): Content collaboration platform, e.g., used for file hosting
-    - [Valkey](https://valkey.io/) (a Redis fork) is used for [memory caching](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/caching_configuration.html#recommendations-based-on-type-of-deployment)
-{%- endif %}
-{%- if use_forgejo %}
-- [Forgejo](https://forgejo.org/): Git hosting with collaborative features (like GitHub)
-{%- endif %}
-{%- if use_umami %}
-- [Umami](https://umami.is/): Privacy-focused web analytics
-{%- endif %}
