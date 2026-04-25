@@ -94,7 +94,7 @@ The config file is located at `$NEXTCLOUD_VOLUME_PATH/config/config.php`.
 See the [Nextcloud configuration documentation](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/index.html) for more information.
 {%- endif %}
 
-{%- if use_nextcloud %}
+{%- if use_forgejo %}
 ### Forgejo
 
 Define the missing environment variables in `.env`:
@@ -127,6 +127,39 @@ You can now access the Forgejo instance and perform the setup process.
 
 Once the initial setup is completed, you can find the config file in `$FORGEJO_VOLUME_PATH/custom/conf/app.ini`.
 See the [Forgejo configuration cheat sheet](https://forgejo.org/docs/latest/admin/config-cheat-sheet/).
+{%- endif %}
+
+{%- if use_umami %}
+### Umami
+
+Create a dedicated database user and database for Umami:
+
+```shell
+./scripts/psql_create.sh --user umami --database umami --password <password>
+```
+
+Define the missing environment variables in `.env`:
+
+- `UMAMI_DOMAIN`: the domain/hostname the Umami instance will be reachable at
+- `UMAMI_DB_USER`: the DB user
+- `UMAMI_DB_PASSWORD`: the DB password
+- `UMAMI_DB_NAME`: the DB name
+- `UMAMI_APP_SECRET`: a unique secret for this Umami instance (see the [Umami documentation](https://docs.umami.is/docs/environment-variables#app_secret-v100))
+
+Bring the container up:
+
+```shell
+docker compose up umami
+```
+
+Check the that everything was initialized correctly and that the server is up and ready.
+
+Press `d` to detach and keep the container running.
+
+You can now access the Umami instance and log in with the [default admin account](https://docs.umami.is/docs/login).
+Change the password right away.
+
+See the [Umami environment variables documentation](https://docs.umami.is/docs/environment-variables).
 {%- endif %}
 
 ## Updating
