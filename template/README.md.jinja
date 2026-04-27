@@ -62,9 +62,11 @@ Define the missing environment variables in `.env`:
 - `NEXTCLOUD_VOLUME_PATH`: the directory for the Nextcloud data on your host
 - `NEXTCLOUD_DOMAIN`: the domain/hostname the Nextcloud instance will be reachable at
 - `NEXTCLOUD_TRUSTED_PROXIES`: the IP address of your reverse proxy (traefik) to be a [trusted proxy](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/reverse_proxy_configuration.html)
+
   ```shell
   {% raw %}docker inspect traefik --format "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"{% endraw %}
   ```
+
 - `VALKEY_VOLUME_PATH`: the directory for the Valkey data on your host
 
 Create a dedicated database user and database for Nextcloud:
