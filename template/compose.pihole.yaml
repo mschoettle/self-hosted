@@ -30,7 +30,7 @@ services:
       - "traefik.http.routers.pihole.rule=Host(`${PIHOLE_DOMAIN:?}`)"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
       # Always redirect / to /admin/
-      - "traefik.http.middlewares.pihole-redirect.redirectregex.regex=^(https://${PIHOLE_DOMAIN:?})/?$"
-      - "traefik.http.middlewares.pihole-redirect.redirectregex.replacement=$${1}/admin/"
+      - "traefik.http.middlewares.pihole-redirect.redirectregex.regex=^(https://${PIHOLE_DOMAIN:?})(:\\d+)?/?$"
+      - "traefik.http.middlewares.pihole-redirect.redirectregex.replacement=$${1}$${2}/admin/"
       - "traefik.http.middlewares.pihole-redirect.redirectregex.permanent=true"
       - "traefik.http.routers.pihole.middlewares=pihole-redirect"

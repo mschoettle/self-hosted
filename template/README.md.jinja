@@ -54,6 +54,31 @@ Define the root password in `.secrets/db_root_password`.
 
 {%- endif %}
 
+{%- if use_pihole %}
+### Pi-hole
+
+Define the missing environment variables in `.env`:
+
+- `PIHOLE_VOLUME_PATH`: the directory for the Pi-hole data on your host
+- `PIHOLE_DOMAIN`: the domain/hostname the Pi-hole instance will be reachable at
+
+Bring the container up:
+
+```shell
+docker compose up -d pihole
+```
+
+Change the admin password:
+
+```shell
+docker compose exec pihole pihole setpassword
+```
+
+You can now access the Pi-hole instance and log in with your password.
+
+See the [Pi-hole configuration documentation](https://docs.pi-hole.net/docker/configuration/).
+{%- endif %}
+
 {%- if use_nextcloud %}
 ### Nextcloud
 
