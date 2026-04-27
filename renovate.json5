@@ -3,6 +3,8 @@
   "extends": [
     // https://docs.renovatebot.com/presets-config/#configrecommended
     "config:recommended",
+    // https://docs.renovatebot.com/presets-default/#separatepatchreleases
+    ":separatePatchReleases",
     // https://docs.renovatebot.com/presets-default/#configmigration
     ":configMigration",
     // https://docs.renovatebot.com/presets-default/#pinallexceptpeerdependencies
