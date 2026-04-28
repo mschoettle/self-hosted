@@ -1,19 +1,19 @@
 services:
   db:
-    container_name: db
     image: postgres:18.3-alpine3.23
-    restart: unless-stopped
-    environment:
-      - TZ=${TIMEZONE:?}
-      - POSTGRES_PASSWORD_FILE=/var/run/secrets/db-root-password
-    secrets:
-      - db-root-password
+    container_name: db
     volumes:
       - type: bind
         source: ${POSTGRESDB_VOLUME_PATH:?}
         target: /var/lib/postgresql
         bind:
           create_host_path: false
+    secrets:
+      - db-root-password
+    environment:
+      - TZ=${TIMEZONE:?}
+      - POSTGRES_PASSWORD_FILE=/var/run/secrets/db-root-password
+    restart: unless-stopped
 
 secrets:
   db-root-password:

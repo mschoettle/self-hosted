@@ -2,15 +2,8 @@ services:
   # https://github.com/pi-hole/docker-pi-hole/
   # https://docs.pi-hole.net/
   pihole:
-    container_name: pihole
     image: pihole/pihole:2026.02.0
-    ports:
-      # DNS Ports
-      - "53:53/tcp"
-      - "53:53/udp"
-    environment:
-      TZ: ${TIMEZONE:?}
-      FTLCONF_dns_listeningMode: 'ALL'
+    container_name: pihole
     volumes:
       # Persist Pi-hole's databases and common configuration file
       - type: bind
@@ -18,12 +11,13 @@ services:
         target: /etc/pihole
         bind:
           create_host_path: false
-    # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    cap_add:
-      - SYS_NICE
-    cap_drop:
-      # No DHCPv6 needed
-      - NET_RAW
+    environment:
+      TZ: ${TIMEZONE:?}
+      FTLCONF_dns_listeningMode: 'ALL'
+    ports:
+      # DNS Ports
+      - '53:53/tcp'
+      - '53:53/udp'
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
@@ -34,3 +28,9 @@ services:
       - "traefik.http.middlewares.pihole-redirect.redirectregex.replacement=$${1}$${2}/admin/"
       - "traefik.http.middlewares.pihole-redirect.redirectregex.permanent=true"
       - "traefik.http.routers.pihole.middlewares=pihole-redirect"
+    # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - SYS_NICE
+    cap_drop:
+      # No DHCPv6 needed
+      - NET_RAW
