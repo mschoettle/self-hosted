@@ -32,9 +32,11 @@ This self-hosted stack is generated from the template at: https://github.com/msc
     ```
 
 1. Define missing env variables in `.env`
-  - `TIMEZONE`: the timezone your stack is running in as a [TZ identifier](ttps://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
-  - `TRAEFIK_ACME_PATH`: the directory where the certificates on your host
-  - `TRAEFIK_LOGS_PATH`: the directory where the access logs on your host
+
+    - `TIMEZONE`: the timezone your stack is running in as a [TZ identifier](ttps://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+    - `TRAEFIK_ACME_PATH`: the directory where the certificates on your host
+    - `TRAEFIK_LOGS_PATH`: the directory where the access logs on your host
+
 {%- if letsencrypt_challenge == 'dns' %}
 1. Add the name of the DNS provider to `traefik.yaml` in `certificatesResolvers.letsencrypt.acme.dnsChallenge.provider`
 1. Add the [environment variables for your DNS provider](https://go-acme.github.io/lego/dns/) to `.envs/letsencrypt.env`
@@ -88,9 +90,9 @@ Define the missing environment variables in `.env`:
 - `NEXTCLOUD_DOMAIN`: the domain/hostname the Nextcloud instance will be reachable at
 - `NEXTCLOUD_TRUSTED_PROXIES`: the IP address of your reverse proxy (traefik) to be a [trusted proxy](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/reverse_proxy_configuration.html)
 
-  ```shell
-  {% raw %}docker inspect traefik --format "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"{% endraw %}
-  ```
+    ```shell
+    {% raw %}docker inspect traefik --format "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"{% endraw %}
+    ```
 
 - `VALKEY_VOLUME_PATH`: the directory for the Valkey data on your host
 
@@ -179,7 +181,7 @@ Bring the container up:
 docker compose up umami
 ```
 
-Check the that everything was initialized correctly and that the server is up and ready.
+Check that everything was initialized correctly and that the server is up and ready.
 
 Press `d` to detach and keep the container running.
 
@@ -191,13 +193,7 @@ See the [Umami environment variables documentation](https://docs.umami.is/docs/e
 
 ## Updating
 
-To update your stack to a new version, run the following command:
-
-```shell
-copier update --trust
-```
-
-Or, via the [`uvx command`](https://docs.astral.sh/uv/guides/tools/#running-tools) of [`uv`](https://docs.astral.sh/uv/):
+To update your stack to a new version, run the following command using the [`uvx command`](https://docs.astral.sh/uv/guides/tools/#running-tools) of [`uv`](https://docs.astral.sh/uv/):
 
 ```shell
 uvx --with copier-templates-extensions copier update --trust
