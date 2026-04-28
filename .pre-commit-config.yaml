@@ -46,6 +46,9 @@ repos:
     hooks:
       - id: j2lint
         args: [--ignore, jinja-statements-delimiter, jinja-statements-indentation, --]
+        exclude:
+          glob:
+            - "template/README.md.jinja"
 
   - repo: https://github.com/scop/pre-commit-shfmt
     rev: v3.13.1-1
