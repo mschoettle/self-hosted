@@ -99,7 +99,7 @@ Define the missing environment variables in `.env`:
 Create a dedicated database user and database for Nextcloud:
 
 ```shell
-./scripts/psql_create.sh --user nextcloud --database nextcloud --password <password>
+./scripts/psql_create_db.sh --user nextcloud --database nextcloud --password <password>
 ```
 
 Bring the container up:
@@ -143,7 +143,7 @@ Define the missing environment variables in `.env`:
 Create a dedicated database user and database for Forgejo:
 
 ```shell
-./scripts/psql_create.sh --user forgejo --database forgejo --password <password>
+./scripts/psql_create_db.sh --user forgejo --database forgejo --password <password>
 ```
 
 Bring the container up:
@@ -164,7 +164,7 @@ See the [Forgejo configuration cheat sheet](https://forgejo.org/docs/latest/admi
 Create a dedicated database user and database for Umami:
 
 ```shell
-./scripts/psql_create.sh --user umami --database umami --password <password>
+./scripts/psql_create_db.sh --user umami --database umami --password <password>
 ```
 
 Define the missing environment variables in `.env`:
