@@ -36,12 +36,19 @@ needs_db:
   default: "{{ use_nextcloud or use_forgejo or use_umami }}"
   when: false
 
+# used for determining if we are under test
+test:
+  type: bool
+  default: false
+  when: false
+
 # recommended by copier-template-tester to have the template in a subdirectory
 # also makes it easier to control which files should be part of the template itself
 _subdirectory: template
 
 _exclude:
   - "compose.*.yaml"
+  - "{% if test is not defined or not test %}tests{% endif %}"
 
 # https://copier.readthedocs.io/en/latest/configuring/#jinja_extensions
 _jinja_extensions:

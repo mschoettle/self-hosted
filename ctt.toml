@@ -5,6 +5,7 @@ _pre_tasks = [
     "tests/check_missing_envs.sh",
     "tests/check_missing_paths.sh",
 ]
+test = true
 letsencrypt_challenge = "tls"
 letsencrypt_email = "foo@bar.baz"
 
@@ -15,6 +16,13 @@ _post_tasks = [
     "docker compose config --format json | jq --exit-status '.services | length == 1'",
     "docker compose config --format json | jq --exit-status '.services[\"traefik\"] | .container_name == \"traefik\"'",
     "prek run --files ./*.*",
+]
+
+[output.".ctt/no_test"]
+test = false
+_pre_tasks = []
+_post_tasks = [
+    "! ls tests/",
 ]
 
 [output.".ctt/dns_challenge"]

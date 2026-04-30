@@ -48,11 +48,6 @@ missing_paths() {
         mkdir -p volumes/nextcloud
     fi
 
-    if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/valkey"; then
-        echo "creating valkey directory"
-        mkdir -p volumes/valkey
-    fi
-
     if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/forgejo"; then
         echo "creating forgejo directory"
         mkdir -p volumes/forgejo
@@ -74,7 +69,6 @@ missing_paths db
 {%- endif %}
 
 {%- if use_nextcloud %}
-missing_paths valkey
 missing_paths nextcloud
 {%- endif %}
 

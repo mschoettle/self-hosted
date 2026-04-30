@@ -94,8 +94,6 @@ Define the missing environment variables in `.env`:
     {% raw %}docker inspect traefik --format "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"{% endraw %}
     ```
 
-- `VALKEY_VOLUME_PATH`: the directory for the Valkey data on your host
-
 Create a dedicated database user and database for Nextcloud:
 
 ```shell
