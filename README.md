@@ -10,7 +10,7 @@ It takes care of TLS termination and routing to each service depending on the re
 The current expectation is that each service is available under its dedicated domain.
 
 TLS certificates are requested using the Let's Encrypt certificate resolver.
-You can use either the TLS or DNS challenge.
+You can use either the [TLS or DNS challenge](https://doc.traefik.io/traefik/reference/install-configuration/tls/certificate-resolvers/acme/#the-different-acme-challenges).
 The DNS challenge is particularly useful if you want to use a wildcard domain, i.e., you have one wildcard certificate for all subdomains of a domain.
 
 These are the available services that are currently supported by this template.
