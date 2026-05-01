@@ -3,12 +3,6 @@ services:
     container_name: nextcloud-valkey
     image: valkey/valkey:9.0.3-alpine3.23
     restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ${VALKEY_VOLUME_PATH:?}
-        target: /data
-        bind:
-          create_host_path: false
 
   nextcloud:
     container_name: nextcloud
