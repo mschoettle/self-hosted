@@ -3,7 +3,7 @@ services:
   # https://docs.pi-hole.net/
   pihole:
     container_name: pihole
-    image: pihole/pihole:2026.02.0
+    image: pihole/pihole:2026.04.1
     ports:
       # DNS Ports
       - "53:53/tcp"
