@@ -6,7 +6,7 @@ services:
 
   nextcloud:
     container_name: nextcloud
-    image: nextcloud:33.0.1-apache
+    image: nextcloud:33.0.2-apache
     restart: unless-stopped
     depends_on:
       - db
@@ -31,7 +31,7 @@ services:
 
   nextcloud-cron:
     container_name: nextcloud-cron
-    image: nextcloud:33.0.1-apache
+    image: nextcloud:33.0.2-apache
     restart: unless-stopped
     depends_on:
       - db
