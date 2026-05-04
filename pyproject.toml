@@ -16,5 +16,5 @@ exclude-newer = "7 days"
 dev = [
     "copier-template-tester==2.4.0b0",
     "j2lint==1.2.0",
-    "prek==0.3.9",
+    "prek==0.3.11",
 ]
