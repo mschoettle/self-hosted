@@ -22,6 +22,9 @@ This self-hosted stack is generated from the template at: https://github.com/msc
 {%- if use_umami %}
 - [Umami](https://umami.is/): Privacy-focused web analytics
 {%- endif %}
+{%- if use_changedetection %}
+- [changedetection.io](https://changedetection.io/): Website change detection and monitoring
+{%- endif %}
 
 ## Getting Started
 
@@ -145,6 +148,24 @@ You can now access the Forgejo instance and perform the setup process.
 
 Once the initial setup is completed, you can find the config file in `$FORGEJO_VOLUME_PATH/custom/conf/app.ini`.
 See the [Forgejo configuration cheat sheet](https://forgejo.org/docs/latest/admin/config-cheat-sheet/).
+{%- endif %}
+
+{%- if use_changedetection %}
+
+### changedetection.io
+
+Define the missing environment variables in `.env`:
+
+- `CHANGEDETECTION_VOLUME_PATH`: the directory for the changedetection.io data on your host
+- `CHANGEDETECTION_DOMAIN`: the domain/hostname the changedetection.io instance will be reachable at
+
+Bring the container up:
+
+```shell
+docker compose up -d changedetection
+```
+
+You can now access the changedetection.io instance.
 {%- endif %}
 
 {%- if use_umami %}

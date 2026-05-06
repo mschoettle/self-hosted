@@ -70,6 +70,10 @@ services:
 {{ load_compose_file("compose.umami.yaml") }}
 {%- endif %}
 
+{%- if use_changedetection %}
+{{ load_compose_file("compose.changedetection.yaml") }}
+{%- endif %}
+
 {%- if needs_db %}
 {{ load_compose_file("compose.postgres.yaml") }}
 {%- endif %}

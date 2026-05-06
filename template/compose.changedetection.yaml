@@ -1,0 +1,15 @@
+services:
+  changedetection:
+    container_name: changedetection
+    image: dgtlmoon/changedetection.io:0.55.3
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: ${CHANGEDETECTION_VOLUME_PATH:?}
+        target: /datastore
+        bind:
+          create_host_path: false
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.changedetection.rule=Host(`${CHANGEDETECTION_DOMAIN:?}`)"
+      - "traefik.http.services.changedetection.loadbalancer.server.port=5000"

@@ -31,6 +31,11 @@ use_umami:
   default: false
   help: Do you want to use Umami for analytics?
 
+use_changedetection:
+  type: bool
+  default: false
+  help: Do you want to use changedetection.io for website change monitoring?
+
 needs_db:
   type: bool
   default: "{{ use_nextcloud or use_forgejo or use_umami }}"
