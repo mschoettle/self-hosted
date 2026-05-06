@@ -52,6 +52,11 @@ missing_paths() {
         echo "creating forgejo directory"
         mkdir -p volumes/forgejo
     fi
+
+    if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/changedetection"; then
+        echo "creating changedetection directory"
+        mkdir -p volumes/changedetection
+    fi
 }
 
 echo "checking missing source paths..."
@@ -74,6 +79,10 @@ missing_paths nextcloud
 
 {%- if use_forgejo %}
 missing_paths forgejo
+{%- endif %}
+
+{%- if use_changedetection %}
+missing_paths changedetection
 {%- endif %}
 
 echo "checking for running containers (there should be none)..."

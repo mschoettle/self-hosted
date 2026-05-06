@@ -69,13 +69,22 @@ _post_tasks = [
     "prek run --files ./*.*",
 ]
 
+[output.".ctt/changedetection"]
+use_changedetection = true
+_post_tasks = [
+    "docker compose config --format json | jq --exit-status '.services | length == 2'",
+    "docker compose config --format json | jq --exit-status '.services[\"changedetection\"] | .container_name == \"changedetection\"'",
+    "prek run --skip mdformat --files ./*",
+]
+
 [output.".ctt/all"]
 use_pihole = true
 use_nextcloud = true
 use_forgejo = true
 use_umami = true
+use_changedetection = true
 _post_tasks = [
-    "docker compose config --format json | jq --exit-status '.services | length == 8'",
+    "docker compose config --format json | jq --exit-status '.services | length == 9'",
     # print volumes that don't have create_host_path = false set
     "docker compose config --format json | jq '[.services[].volumes[]? | select(.bind.create_host_path != false)]'",
     "docker compose config --format json | jq --exit-status '[.services[].volumes[]?] | all(.bind.create_host_path == false)'",

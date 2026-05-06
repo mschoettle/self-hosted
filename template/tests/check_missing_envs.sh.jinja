@@ -97,6 +97,16 @@ check_config() {
         sed -i.bak "s|^UMAMI_DOMAIN=$|UMAMI_DOMAIN=umami.example.dev|" .env
     fi
 
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable CHANGEDETECTION_VOLUME_PATH is missing a value"; then
+        echo "setting changedetection volume path"
+        sed -i.bak "s|^CHANGEDETECTION_VOLUME_PATH=$|CHANGEDETECTION_VOLUME_PATH=./volumes/changedetection|" .env
+    fi
+
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable CHANGEDETECTION_DOMAIN is missing a value"; then
+        echo "setting changedetection domain"
+        sed -i.bak "s|^CHANGEDETECTION_DOMAIN=$|CHANGEDETECTION_DOMAIN=changedetection.example.dev|" .env
+    fi
+
 }
 
 # Check that all variables are required
@@ -139,6 +149,12 @@ echo "umami is enabled, setting missing umami env variables..."
 check_config
 check_config
 check_config
+check_config
+check_config
+{%- endif %}
+
+{%- if use_changedetection %}
+echo "changedetection is enabled, setting missing changedetection env variables..."
 check_config
 check_config
 {%- endif %}
