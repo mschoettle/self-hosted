@@ -159,6 +159,24 @@ Once the initial setup is completed, you can find the config file in `$FORGEJO_V
 See the [Forgejo configuration cheat sheet](https://forgejo.org/docs/latest/admin/config-cheat-sheet/).
 {%- endif %}
 
+{%- if use_changedetection %}
+
+### changedetection.io
+
+Define the missing environment variables in `.env`:
+
+- `CHANGEDETECTION_VOLUME_PATH`: the directory for the changedetection.io data on your host
+- `CHANGEDETECTION_DOMAIN`: the domain/hostname the changedetection.io instance will be reachable at
+
+Bring the container up:
+
+```shell
+docker compose up -d changedetection
+```
+
+You can now access the changedetection.io instance.
+{%- endif %}
+
 {%- if use_umami %}
 
 ### Umami
