@@ -18,7 +18,7 @@ They are all optional:
 
 - [Pi-hole](https://pi-hole.net/): Network-wide ad blocking
 - [Nextcloud](https://nextcloud.com/): Content collaboration platform, e.g., used for file hosting
-  - [Valkey](https://valkey.io/) (a Redis fork) is used for [memory caching](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/caching_configuration.html#recommendations-based-on-type-of-deployment)
+    - [Valkey](https://valkey.io/) (a Redis fork) is used for [memory caching](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/caching_configuration.html#recommendations-based-on-type-of-deployment)
 - [Forgejo](https://forgejo.org/): Git hosting with collaborative features (like GitHub)
 - [changedetection.io](https://changedetection.io/): Website change detection and monitoring
 - [Umami](https://umami.is/): Privacy-focused web analytics

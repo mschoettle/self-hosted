@@ -48,17 +48,6 @@ This self-hosted stack is generated from the template at: https://github.com/msc
 {%- endif %}
 1. Create directories for all the volume paths you defined
 
-{%- if needs_db %}
-### Database
-
-Define the missing environment variables in `.env`:
-
-- `POSTGRESDB_VOLUME_PATH`: the directory where the PostgreSQL data on your host
-
-Define the root password in `.secrets/db_root_password`.
-
-{%- endif %}
-
 {%- if use_pihole %}
 
 ### Pi-hole
@@ -143,7 +132,6 @@ Define the missing environment variables in `.env`:
 - `FORGEJO_DOMAIN`: the domain/hostname the Forgejo instance will be reachable at
 - `FORGEJO_SSH_PORT`: the port that Forgejo uses for SSH-based Git operations
 
-
 Create a dedicated database user and database for Forgejo:
 
 ```shell
@@ -212,6 +200,17 @@ You can now access the Umami instance and log in with the [default admin account
 Change the password right away.
 
 See the [Umami environment variables documentation](https://docs.umami.is/docs/environment-variables).
+{%- endif %}
+
+{%- if needs_db %}
+
+### Database
+
+Define the missing environment variables in `.env`:
+
+- `POSTGRESDB_VOLUME_PATH`: the directory where the PostgreSQL data on your host
+
+Define the root password in `.secrets/db_root_password`.
 {%- endif %}
 
 ## Updating
