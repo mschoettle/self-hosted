@@ -75,8 +75,8 @@ use_nextcloud = true
 use_forgejo = true
 use_umami = true
 _post_tasks = [
+    "docker compose version",
     "docker compose config --format json | jq --exit-status '.services | length == 8'",
-    "docker compose --version",
     # print volumes that don't have create_host_path = false set
     "docker compose config --format json | jq '[.services[].volumes[]? | select(.bind.create_host_path != false)]'",
     "docker compose config --format json | jq --exit-status '[.services[].volumes[]?] | all(.bind.create_host_path == false)'",
