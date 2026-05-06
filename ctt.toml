@@ -9,65 +9,65 @@ test = true
 letsencrypt_challenge = "tls"
 letsencrypt_email = "foo@bar.baz"
 
-# [output.".ctt/defaults"]
-# _post_tasks = [
-#     "! ls .envs/letsencrypt.env",
-#     "! ls compose.*.yaml",
-#     "docker compose config --format json | jq --exit-status '.services | length == 1'",
-#     "docker compose config --format json | jq --exit-status '.services[\"traefik\"] | .container_name == \"traefik\"'",
-#     "prek run --skip mdformat --files ./*",
-# ]
+[output.".ctt/defaults"]
+_post_tasks = [
+    "! ls .envs/letsencrypt.env",
+    "! ls compose.*.yaml",
+    "docker compose config --format json | jq --exit-status '.services | length == 1'",
+    "docker compose config --format json | jq --exit-status '.services[\"traefik\"] | .container_name == \"traefik\"'",
+    "prek run --skip mdformat --files ./*",
+]
 
-# [output.".ctt/no_test"]
-# test = false
-# _pre_tasks = []
-# _post_tasks = [
-#     "! ls tests/",
-# ]
+[output.".ctt/no_test"]
+test = false
+_pre_tasks = []
+_post_tasks = [
+    "! ls tests/",
+]
 
-# [output.".ctt/dns_challenge"]
-# letsencrypt_challenge = "dns"
-# _post_tasks = [
-#     "ls .envs/letsencrypt.env",
-#     "docker compose config --format json | jq --exit-status '.services | length == 1'",
-#     "docker compose config --format json | jq --exit-status '.services[\"traefik\"] | .container_name == \"traefik\"'",
-#     "prek run --skip mdformat --files ./*",
-# ]
+[output.".ctt/dns_challenge"]
+letsencrypt_challenge = "dns"
+_post_tasks = [
+    "ls .envs/letsencrypt.env",
+    "docker compose config --format json | jq --exit-status '.services | length == 1'",
+    "docker compose config --format json | jq --exit-status '.services[\"traefik\"] | .container_name == \"traefik\"'",
+    "prek run --skip mdformat --files ./*",
+]
 
-# [output.".ctt/pihole"]
-# use_pihole = true
-# _post_tasks = [
-#     "docker compose config --format json | jq --exit-status '.services | length == 2'",
-#     "docker compose config --format json | jq --exit-status '.services[\"pihole\"] | .container_name == \"pihole\"'",
-#     "prek run --skip mdformat --files ./*",
-# ]
+[output.".ctt/pihole"]
+use_pihole = true
+_post_tasks = [
+    "docker compose config --format json | jq --exit-status '.services | length == 2'",
+    "docker compose config --format json | jq --exit-status '.services[\"pihole\"] | .container_name == \"pihole\"'",
+    "prek run --skip mdformat --files ./*",
+]
 
-# [output.".ctt/nextcloud"]
-# use_nextcloud = true
-# _post_tasks = [
-#     "docker compose config --format json | jq --exit-status '.services | length == 5'",
-#     "docker compose config --format json | jq --exit-status '.services[\"nextcloud\"] | .container_name == \"nextcloud\"'",
-#     "docker compose config --format json | jq --exit-status '.services[\"db\"] | .container_name == \"db\"'",
-#     "prek run --skip mdformat --files ./*",
-# ]
+[output.".ctt/nextcloud"]
+use_nextcloud = true
+_post_tasks = [
+    "docker compose config --format json | jq --exit-status '.services | length == 5'",
+    "docker compose config --format json | jq --exit-status '.services[\"nextcloud\"] | .container_name == \"nextcloud\"'",
+    "docker compose config --format json | jq --exit-status '.services[\"db\"] | .container_name == \"db\"'",
+    "prek run --skip mdformat --files ./*",
+]
 
-# [output.".ctt/forgejo"]
-# use_forgejo = true
-# _post_tasks = [
-#     "docker compose config --format json | jq --exit-status '.services | length == 3'",
-#     "docker compose config --format json | jq --exit-status '.services[\"forgejo\"] | .container_name == \"forgejo\"'",
-#     "docker compose config --format json | jq --exit-status '.services[\"db\"] | .container_name == \"db\"'",
-#     "prek run --skip mdformat --files ./*",
-# ]
+[output.".ctt/forgejo"]
+use_forgejo = true
+_post_tasks = [
+    "docker compose config --format json | jq --exit-status '.services | length == 3'",
+    "docker compose config --format json | jq --exit-status '.services[\"forgejo\"] | .container_name == \"forgejo\"'",
+    "docker compose config --format json | jq --exit-status '.services[\"db\"] | .container_name == \"db\"'",
+    "prek run --skip mdformat --files ./*",
+]
 
-# [output.".ctt/umami"]
-# use_umami = true
-# _post_tasks = [
-#     "docker compose config --format json | jq --exit-status '.services | length == 3'",
-#     "docker compose config --format json | jq --exit-status '.services[\"umami\"] | .container_name == \"umami\"'",
-#     "docker compose config --format json | jq --exit-status '.services[\"db\"] | .container_name == \"db\"'",
-#     "prek run --skip mdformat --files ./*",
-# ]
+[output.".ctt/umami"]
+use_umami = true
+_post_tasks = [
+    "docker compose config --format json | jq --exit-status '.services | length == 3'",
+    "docker compose config --format json | jq --exit-status '.services[\"umami\"] | .container_name == \"umami\"'",
+    "docker compose config --format json | jq --exit-status '.services[\"db\"] | .container_name == \"db\"'",
+    "prek run --skip mdformat --files ./*",
+]
 
 [output.".ctt/changedetection"]
 use_changedetection = true
