@@ -74,7 +74,8 @@ repos:
     rev: 1.0.0
     hooks:
       - id: mdformat
-        language: python
+        additional_dependencies:
+          - mdformat-mkdocs==5.1.4
         args: [--number]
 
   - repo: https://github.com/DavidAnson/markdownlint-cli2
