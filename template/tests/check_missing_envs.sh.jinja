@@ -107,6 +107,11 @@ check_config() {
         sed -i.bak "s|^CHANGEDETECTION_DOMAIN=$|CHANGEDETECTION_DOMAIN=changedetection.example.dev|" .env
     fi
 
+    if printf '%s\n' "$validate_result" | grep --quiet "required variable WIREGUARD_CONFIG_PATH is missing a value"; then
+        echo "setting wireguard config path"
+        sed -i.bak "s|^WIREGUARD_CONFIG_PATH=$|WIREGUARD_CONFIG_PATH=./volumes/wireguard|" .env
+    fi
+
 }
 
 # Check that all variables are required
@@ -156,6 +161,11 @@ check_config
 {%- if use_changedetection %}
 echo "changedetection is enabled, setting missing changedetection env variables..."
 check_config
+check_config
+{%- endif %}
+
+{%- if use_wireguard %}
+echo "wireguard is enabled, setting missing wireguard env variables..."
 check_config
 {%- endif %}
 

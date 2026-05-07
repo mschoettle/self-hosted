@@ -1,0 +1,21 @@
+services:
+  wireguard:
+    image: linuxserver/wireguard:1.0.20250521-r1-ls102
+    container_name: wireguard
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE:?}
+    env_file:
+      - .envs/wireguard.env
+    volumes:
+      - type: bind
+        source: ${WIREGUARD_CONFIG_PATH:?}
+        target: /config
+        bind:
+          create_host_path: false
+    ports:
+      - 51820:51820/udp

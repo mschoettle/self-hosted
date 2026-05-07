@@ -36,6 +36,11 @@ use_changedetection:
   default: false
   help: Do you want to use changedetection.io for website change monitoring?
 
+use_wireguard:
+  type: bool
+  default: false
+  help: Do you want to use WireGuard as a VPN?
+
 needs_db:
   type: bool
   default: "{{ use_nextcloud or use_forgejo or use_umami }}"
