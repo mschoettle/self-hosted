@@ -49,6 +49,13 @@
     ],
   },
   "packageRules": [
+    // Handle linuxserver/wireguard images which use build and revision indicators as well
+    // Derived from: https://docs.renovatebot.com/modules/versioning/regex/#description:~:text=Here%20is%20another%20example%2C%20this%20time%20for%20handling%20ghcr%2Eio%2Flinuxserver%2Fopenssh%2Dserver%20Docker%20images%2C%20which%20use%20patch%2C%20build%20and%20revision%20indicators%20with%20string%20prefixes
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["linuxserver/wireguard"],
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-r(?<build>\\d)-ls(?<revision>.+)$",
+    },
     // Combine uv package, uv image, and uv-pre-commit
     {
       "matchPackageNames": ["/uv-pre-commit|uv$/"],
