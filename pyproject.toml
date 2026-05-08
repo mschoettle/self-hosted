@@ -3,7 +3,7 @@ name = "self-hosted"
 version = "0"
 requires-python = "==3.14.4"
 dependencies = [
-    "copier==9.14.3",
+    "copier==9.15.0",
     "copier-templates-extensions==0.3.2",
 ]
 
