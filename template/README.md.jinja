@@ -25,6 +25,9 @@ This self-hosted stack is generated from the template at: https://github.com/msc
 {%- if use_changedetection %}
 - [changedetection.io](https://changedetection.io/): Website change detection and monitoring
 {%- endif %}
+{%- if use_wireguard %}
+- [WireGuard](https://docs.linuxserver.io/images/docker-wireguard/): Fast, modern, secure VPN tunnel
+{%- endif %}
 
 ## Getting Started
 
@@ -166,6 +169,26 @@ docker compose up -d changedetection
 ```
 
 You can now access the changedetection.io instance.
+{%- endif %}
+
+{%- if use_wireguard %}
+
+### WireGuard
+
+Define the missing environment variables in `.env`:
+
+- `WIREGUARD_CONFIG_PATH`: the directory for the WireGuard client configurations on your host
+
+WireGuard operates in [server mode](https://docs.linuxserver.io/images/docker-wireguard/#server-mode).
+Define the environment variables in `.envs/wireguard.env` (see the [WireGuard configuration documentation](https://docs.linuxserver.io/images/docker-wireguard/#environment-variables-e).
+
+Bring the container up:
+
+```shell
+docker compose up -d wireguard
+```
+
+Peer configuration files will be generated in `$WIREGUARD_CONFIG_PATH`.
 {%- endif %}
 
 {%- if use_umami %}

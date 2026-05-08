@@ -22,6 +22,7 @@ They are all optional:
 - [Forgejo](https://forgejo.org/): Git hosting with collaborative features (like GitHub)
 - [changedetection.io](https://changedetection.io/): Website change detection and monitoring
 - [Umami](https://umami.is/): Privacy-focused web analytics
+- [WireGuard](https://docs.linuxserver.io/images/docker-wireguard/): Fast, modern, secure VPN tunnel
 
 Some services require a database.
 A [PostgreSQL](https://www.postgresql.org/) database service is added if a service is chosen that requires one.

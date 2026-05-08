@@ -57,6 +57,11 @@ missing_paths() {
         echo "creating changedetection directory"
         mkdir -p volumes/changedetection
     fi
+
+    if printf '%s\n' "$run_result" | grep --quiet "bind source path does not exist:.*/volumes/wireguard"; then
+        echo "creating wireguard directory"
+        mkdir -p volumes/wireguard
+    fi
 }
 
 echo "checking missing source paths..."
@@ -83,6 +88,10 @@ missing_paths forgejo
 
 {%- if use_changedetection %}
 missing_paths changedetection
+{%- endif %}
+
+{%- if use_wireguard %}
+missing_paths wireguard
 {%- endif %}
 
 echo "checking for running containers (there should be none)..."

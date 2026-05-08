@@ -74,6 +74,10 @@ services:
 {{ load_compose_file("compose.changedetection.yaml") }}
 {%- endif %}
 
+{%- if use_wireguard %}
+{{ load_compose_file("compose.wireguard.yaml") }}
+{%- endif %}
+
 {%- if needs_db %}
 {{ load_compose_file("compose.postgres.yaml") }}
 {%- endif %}
