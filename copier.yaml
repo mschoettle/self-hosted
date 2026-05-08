@@ -39,7 +39,7 @@ use_changedetection:
 use_wireguard:
   type: bool
   default: false
-  help: Do you want to use WireGuard as a VPN?
+  help: Do you want to use WireGuard for your VPN?
 
 needs_db:
   type: bool
