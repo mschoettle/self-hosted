@@ -64,5 +64,6 @@ jobs:
         run: |
           cd /tmp/test
           git init
-          git commit --all --author "test <test@example.com>" -m "test"
+          git add .
+          git commit --author "test <test@example.com>" -m "test"
           uvx copier update
