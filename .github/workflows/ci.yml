@@ -55,8 +55,15 @@ jobs:
       #   run: |
       #     ./ctt.sh
 
-      - name: Test end-to-end
+      - name: Test `copier copy`
         run: |
           uvx copier copy --vcs-ref HEAD \
             --data-file .github/answers.yaml \
-            . /tmp/test-output
+            . /tmp/test
+      - name: Test `copier update`
+        run: |
+          cd /tmp/test
+          git init
+          git add .
+          git commit -m "test"
+          uvx copier update
