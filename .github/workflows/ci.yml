@@ -56,8 +56,7 @@ jobs:
       #     ./ctt.sh
 
       - name: Test end-to-end
-        env:
-          GITHUB_TEST: github
         run: |
-          echo ${{ toJson(env.GITHUB_TEST) }}
-          uvx copier copy
+          uvx copier copy --vcs-ref HEAD \
+            --data-file .github/answers.yaml \
+            . /tmp/test-output
