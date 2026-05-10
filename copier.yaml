@@ -60,8 +60,6 @@ _exclude:
   - "compose.*.yaml"
   - "{% if test is not defined or not test %}tests{% endif %}"
 
-# https://copier.readthedocs.io/en/latest/configuring/#jinja_extensions
-_jinja_extensions:
-  # https://github.com/copier-org/copier-templates-extensions/#usage
-  - copier_templates_extensions.TemplateExtensionLoader
-  - extensions/strictundefined.py:StrictUndefinedExtension
+# https://copier.readthedocs.io/en/stable/configuring/#envops
+_envops:
+  undefined: jinja2.StrictUndefined

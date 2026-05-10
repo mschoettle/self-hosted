@@ -4,7 +4,6 @@ version = "0"
 requires-python = "==3.14.4"
 dependencies = [
     "copier==9.15.0",
-    "copier-templates-extensions==0.3.2",
 ]
 
 # https://docs.astral.sh/uv/reference/settings/#configuration
