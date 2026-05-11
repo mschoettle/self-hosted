@@ -61,7 +61,12 @@ jobs:
             --data-file .github/answers.yaml \
             ${{ github.server_url }}/${{ github.repository }} /tmp/test
       - name: Test `copier update`
+        env:
+          GIT_AUTHOR_NAME: test
+          GIT_AUTHOR_EMAIL: test@example.com
         run: |
           cd /tmp/test
           git init
-          uvx copier update
+          git add .
+          git commit -m "Initial commit"
+          uvx copier update --skip-answered --vcs-ref ${{ github.sha }}
