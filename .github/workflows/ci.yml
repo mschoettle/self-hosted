@@ -57,12 +57,14 @@ jobs:
 
       - name: Test `copier copy`
         env:
-          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REF: ${{ github.head_ref || github.ref_name }}
         run: |
           uvx copier copy --vcs-ref "$HEAD_REF" \
             --data-file .github/answers.yaml \
             ${{ github.server_url }}/${{ github.repository }}.git /tmp/test
       - name: Test `copier update`
+        env:
+          HEAD_REF: ${{ github.head_ref || github.ref_name }}
         run: |
           cd /tmp/test
           cat .copier-answers.yml
@@ -71,4 +73,4 @@ jobs:
           git config user.name "test"
           git add .
           git commit -m "Initial commit"
-          uvx copier update --skip-answered
+          uvx copier update --skip-answered --vcs-ref "$HEAD_REF"
