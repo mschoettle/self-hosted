@@ -1,0 +1,8 @@
+letsencrypt_challenge: tls
+letsencrypt_email: foo@bar.baz
+use_pihole: true
+use_nextcloud: true
+use_forgejo: true
+use_umami: true
+use_changedetection: true
+use_wireguard: true
