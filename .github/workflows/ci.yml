@@ -56,14 +56,8 @@ jobs:
       #     ./ctt.sh
 
       - name: Test `copier copy`
-        env:
-          BASE_REF: ${{ github.base_ref }}
-          HEAD_REF: ${{ github.head_ref }}
         run: |
-          echo "$GITHUB_REF_NAME"
-          echo "$BASE_REF"
-          echo "$HEAD_REF"
-          uvx copier copy --vcs-ref "$GITHUB_REF_NAME" \
+          uvx copier copy --vcs-ref "$GITHUBHEAD_REF" \
             --data-file .github/answers.yaml \
             ${{ github.repositoryUrl }} /tmp/test
       - name: Test `copier update`
