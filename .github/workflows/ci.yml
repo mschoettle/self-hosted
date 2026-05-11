@@ -58,12 +58,13 @@ jobs:
       - name: Test `copier copy`
         run: |
           echo "$GITHUB_REF"
-          uvx copier copy --vcs-ref ${{ github.sha }} \
+          uvx copier copy --vcs-ref "$GITHUB_REF" \
             --data-file .github/answers.yaml \
             ${{ github.server_url }}/${{ github.repository }}.git /tmp/test
       - name: Test `copier update`
         run: |
           cd /tmp/test
+          cat .copier-answers.yml
           git init
           git config user.email "test@example.com"
           git config user.name "test"
