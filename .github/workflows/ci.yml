@@ -63,4 +63,5 @@ jobs:
       - name: Test `copier update`
         run: |
           cd /tmp/test
+          git init
           uvx copier update
