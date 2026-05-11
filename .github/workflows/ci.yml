@@ -70,4 +70,4 @@ jobs:
           git config user.name "test"
           git add .
           git commit -m "Initial commit"
-          uvx copier update --skip-answered --vcs-ref ${{ github.sha }}
+          uvx copier update --skip-answered
