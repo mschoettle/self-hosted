@@ -57,9 +57,9 @@ jobs:
 
       - name: Test `copier copy`
         run: |
-          uvx copier copy --vcs-ref HEAD \
+          uvx copier copy --vcs-ref ${{ github.sha }} \
             --data-file .github/answers.yaml \
-            . /tmp/test
+            ${{ github.server_url }}/${{ github.repository }} /tmp/test
       - name: Test `copier update`
         run: |
           cd /tmp/test
