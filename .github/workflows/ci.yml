@@ -36,6 +36,11 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    env:
+      # for PRs: target branch, otherwise the branch name
+      HEAD_REF: ${{ github.head_ref || github.ref_name }}
+      # for PRs: the PR branch, otherwise the previous commit to simulate updating from an earlier version
+      BASE_REF: ${{ github.base_ref || 'HEAD~1' }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -54,3 +59,19 @@ jobs:
       - name: Test template using copier-template-tester
         run: |
           ./ctt.sh
+
+      - name: Test "copier copy"
+        run: |
+          uvx copier copy --vcs-ref "$BASE_REF" \
+            --data-file .github/answers.yaml \
+            ${{ github.server_url }}/${{ github.repository }}.git /tmp/test
+      - name: Test "copier update"
+        run: |
+          cd /tmp/test
+          cat .copier-answers.yml
+          git init
+          git config user.email "test@example.com"
+          git config user.name "test"
+          git add .
+          git commit -m "Initial commit"
+          uvx copier update --skip-answered --vcs-ref "$HEAD_REF"
