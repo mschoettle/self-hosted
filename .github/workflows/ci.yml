@@ -62,8 +62,8 @@ jobs:
             ${{ github.server_url }}/${{ github.repository }} /tmp/test
       - name: Test `copier update`
         env:
-          GIT_AUTHOR_NAME: test
-          GIT_AUTHOR_EMAIL: test@example.com
+          GIT_COMMITTER_NAME: test
+          GIT_COMMITTER_EMAIL: test@example.com
         run: |
           cd /tmp/test
           git init
