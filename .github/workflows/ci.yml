@@ -63,7 +63,4 @@ jobs:
       - name: Test `copier update`
         run: |
           cd /tmp/test
-          git init
-          git add .
-          git commit --author "test <test@example.com>" -m "test"
           uvx copier update
