@@ -57,8 +57,8 @@ jobs:
 
       - name: Test `copier copy`
         run: |
-          echo "$GITHUB_REF"
-          uvx copier copy --vcs-ref "$GITHUB_REF" \
+          echo "$GITHUB_REF_NAME"
+          uvx copier copy --vcs-ref "$GITHUB_REF_NAME" \
             --data-file .github/answers.yaml \
             ${{ github.server_url }}/${{ github.repository }}.git /tmp/test
       - name: Test `copier update`
