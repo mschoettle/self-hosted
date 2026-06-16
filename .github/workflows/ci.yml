@@ -32,7 +32,7 @@ jobs:
       - uses: j178/prek-action@6ad80277337ad479fe43bd70701c3f7f8aa74db3 # v2.0.3
         with:
           # renovate: datasource=pypi depName=prek
-          prek-version: "0.3.8"
+          prek-version: "0.4.4"
 
   test:
     runs-on: ubuntu-latest
