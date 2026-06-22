@@ -29,7 +29,7 @@ jobs:
         with:
           # renovate: datasource=pypi depName=uv
           version: "0.11.19"
-      - uses: j178/prek-action@6ad80277337ad479fe43bd70701c3f7f8aa74db3 # v2.0.3
+      - uses: j178/prek-action@bdca6f102f98e2b4c7029491a53dfd366469e33d # v2.0.4
         with:
           # renovate: datasource=pypi depName=prek
           prek-version: "0.4.4"
