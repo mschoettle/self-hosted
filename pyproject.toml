@@ -1,7 +1,7 @@
 [project]
 name = "self-hosted"
 version = "0"
-requires-python = "==3.14.5"
+requires-python = "==3.14.6"
 dependencies = [
     "copier==9.15.0",
 ]
