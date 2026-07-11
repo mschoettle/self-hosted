@@ -3,7 +3,7 @@ name = "self-hosted"
 version = "0"
 requires-python = "==3.14.6"
 dependencies = [
-    "copier==9.15.0",
+    "copier==9.16.0",
 ]
 
 # https://docs.astral.sh/uv/reference/settings/#configuration
