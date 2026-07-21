@@ -59,15 +59,15 @@ wheels = [
 
 [[package]]
 name = "copier-template-tester"
-version = "2.4.0b0"
+version = "2.5.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "copier" },
     { name = "corallium" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/43/cf/bdc203f8e0bf587a5508ee2c615821f0f596b6c23b854fc6ff4275aa0ca7/copier_template_tester-2.4.0b0.tar.gz", hash = "sha256:c7fd5720e394f8af7337405fe16dd97296d6a2373851b44605dee314581fd270", size = 11328, upload-time = "2026-03-25T03:37:16.186Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b5/5f/44fb0b2b30f9e5b4df47c5f173e913c46ae1f3cdc098aa54411a39cd2b88/copier_template_tester-2.5.0.tar.gz", hash = "sha256:dc4c42ad5772908e65c788ee43eb7daf863ee2aa145d9d35d87d2df6936f3ac7", size = 14988, upload-time = "2026-07-05T02:54:21.443Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d2/26/97f3bcde5aa44cc388244ca1fca8696811df8d816cef2d49ef0d0fab60d4/copier_template_tester-2.4.0b0-py3-none-any.whl", hash = "sha256:a3706db9afd2fac7d53669a889bc86106b981ed20c92b91bea83b240c439fb7c", size = 12887, upload-time = "2026-03-25T03:37:15.146Z" },
+    { url = "https://files.pythonhosted.org/packages/c5/e4/74bae48d22e1206f690e3b02407964d535916fb9d2327d95961a2c1c767a/copier_template_tester-2.5.0-py3-none-any.whl", hash = "sha256:bfd76a8932538d6b05c63d3757026b515683779b559f58ec648cc926aef61b60", size = 15088, upload-time = "2026-07-05T02:54:20.059Z" },
 ]
 
 [[package]]
@@ -402,7 +402,7 @@ requires-dist = [{ name = "copier", specifier = "==9.16.0" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "copier-template-tester", specifier = "==2.4.0b0" },
+    { name = "copier-template-tester", specifier = "==2.5.0" },
     { name = "j2lint", specifier = "==1.2.0" },
     { name = "prek", specifier = "==0.4.8" },
 ]
