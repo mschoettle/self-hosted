@@ -1,6 +1,6 @@
 services:
   wireguard:
-    image: linuxserver/wireguard:1.0.20250521-r1-ls113
+    image: linuxserver/wireguard:1.0.20260223-r0-ls118
     container_name: wireguard
     restart: unless-stopped
     cap_add:
