@@ -85,7 +85,7 @@ repos:
 
   # zizmor detects security vulnerabilities in GitHub Actions workflows.
   - repo: https://github.com/woodruffw/zizmor-pre-commit
-    rev: v1.26.1
+    rev: v1.27.0
     hooks:
       - id: zizmor
 
@@ -102,7 +102,7 @@ repos:
           - "github.com/wasilibs/go-shellcheck/cmd/shellcheck@v0.11.1"
 
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 43.251.3
+    rev: 43.269.1
     hooks:
       - id: renovate-config-validator
         stages:
