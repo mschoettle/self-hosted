@@ -16,7 +16,7 @@ repos:
       - id: detect-private-key
 
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: 0.26
+    rev: v0.27
     hooks:
       - id: validate-pyproject
 
@@ -31,7 +31,7 @@ repos:
       - id: typos
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.38.2
+    rev: 0.39.0
     hooks:
       - id: check-github-workflows
         args: ["--verbose"]
@@ -102,7 +102,7 @@ repos:
           - "github.com/wasilibs/go-shellcheck/cmd/shellcheck@v0.11.1"
 
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 44.167.7
+    rev: 44.198.3
     hooks:
       - id: renovate-config-validator
         stages:
