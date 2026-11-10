@@ -26,7 +26,7 @@
     "github>mschoettle/renovate-presets//presets/packages/actions-docker.json5",
   ],
   // https://docs.renovatebot.com/configuration-options/#assignees
-  "assignees": ["mschoettle"],
+  "assignees": [],
   "labels": ["dependencies"],
   // Only rebase existing MRs when the branch is conflicted
   // This avoids getting spammed by updates to existing MRs
